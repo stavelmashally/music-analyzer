@@ -7,7 +7,7 @@ module.exports = class SpotifyApi {
     this.clientSecret = clientSecret;
   }
 
-  async getAccessToken() {
+  async generateAuthHeaders() {
     const res = await axios.post(
       'https://accounts.spotify.com/api/token',
       qs.stringify({
@@ -25,52 +25,60 @@ module.exports = class SpotifyApi {
       }
     );
 
-    return res.data.access_token;
+    const accessToken = res.data.access_token;
+
+    return {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
   }
 
-  async getTrackList(trackName) {
-    const accessToken = await this.getAccessToken();
+  async getArtist(artistName) {
+    const authHeaders = this.generateAuthHeaders();
 
     const res = await axios.get(
-      `https://api.spotify.com/v1/search?q=${trackName}&type=track`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
+      `https://api.spotify.com/v1/search?q=${artistName}&type=artist`,
+      authHeaders
     );
 
-    const tracks = res.data.tracks.items.map(({ id, name, artists }) => {
-      return {
-        id,
-        name,
-        artists: artists.map(({ name }) => name).join(', '),
-      };
-    });
+    const artists = res.data.artists.items.map(({ id, name, images }) => ({
+      id,
+      name,
+      image: images[0],
+    }));
 
-    return tracks;
+    return artists;
   }
 
-  async getAudioFeatures(trackIds) {
-    const accessToken = await this.getAccessToken();
-    
+  async getAudioFeatures(artistId) {
+    const authHeaders = this.generateAuthHeaders();
+
+    const tracks = await axios.get(
+      `https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=US`,
+      authHeaders
+    );
+
+    const trackIds = tracks.data.tracks.map(track => track.id).join(',');
+
     const res = await axios.get(
       `https://api.spotify.com/v1/audio-features/?ids=${trackIds}`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
+      authHeaders
     );
 
-    const audioFeatures = res.data.audio_features.map((features, idx) => {
-      return {
-        name: tracks[idx].name,
-        artists: tracks[idx].artists,
-        features,
-      };
-    });
+    const audioFeatures = res.data.audio_features;
 
     return audioFeatures;
   }
-}
+};
+
+// (async function () {
+//   const spotify = new SpotifyApi(
+//     '69b69caae3334c56b651a2f714b35f3c',
+//     '728cfe36ae884f18a8da60d95052a130'
+//   );
+//   const artists = await spotify.getArtist('tuna');
+//   const artistTracks = await spotify.getArtistTracks(artists[0].id);
+//   const features = await spotify.getAudioFeatures(artistTracks.join(','));
+//   console.log(features);
+// })();

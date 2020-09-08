@@ -3,18 +3,18 @@ const SpotifyApi = require('../services/SpotifyApi');
 
 const spotifyApi = new SpotifyApi(keys.clientId, keys.clientSecret);
 
-exports.getTracks = async (req, res) => {
+exports.getArtist = async (req, res) => {
   const name = req.query.name;
 
-  const tracks =  await spotifyApi.getTrackList(name)
+  const artists = await spotifyApi.getArtist(name);
 
-  return res.send(tracks);
+  return res.send(artists);
 };
 
 exports.getAudioFeatures = async (req, res) => {
-  const ids = req.query.ids;
+  const artistId = req.query.artistId;
 
-  const features = await spotifyApi.getAudioFeatures()
+  const features = await spotifyApi.getAudioFeatures(artistId);
 
-  return res.send(ids);
+  return res.send(features);
 };
