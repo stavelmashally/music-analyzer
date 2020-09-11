@@ -35,7 +35,7 @@ module.exports = class SpotifyApi {
   }
 
   async getArtist(artistName) {
-    const authHeaders = this.generateAuthHeaders();
+    const authHeaders = await this.generateAuthHeaders();
 
     const res = await axios.get(
       `https://api.spotify.com/v1/search?q=${artistName}&type=artist`,
@@ -52,7 +52,7 @@ module.exports = class SpotifyApi {
   }
 
   async getAudioFeatures(artistId) {
-    const authHeaders = this.generateAuthHeaders();
+    const authHeaders = await this.generateAuthHeaders();
 
     const tracks = await axios.get(
       `https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=US`,
