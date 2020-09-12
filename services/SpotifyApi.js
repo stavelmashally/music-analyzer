@@ -38,22 +38,27 @@ module.exports = class SpotifyApi {
     const authHeaders = await this.generateAuthHeaders();
 
     const res = await axios.get(
-      `https://api.spotify.com/v1/search?q=${artistName}&type=artist`,
+      `https://api.spotify.com/v1/search?q=${artistName}&type=artist&limit=5`,
       authHeaders
     );
 
-    const artists = res.data.artists.items.map(({ id, name, images }) => ({
-      id,
-      name,
-      image: images[0],
-    }));
+    const artists = await Promise.all(
+      res.data.artists.items.map(async ({ id, name, images }) => {
+        const features = await this.getAudioFeatures(id, authHeaders);
+
+        return {
+          id,
+          name,
+          image: images[0],
+          audioFeatures: features,
+        };
+      })
+    );
 
     return artists;
   }
 
-  async getAudioFeatures(artistId) {
-    const authHeaders = await this.generateAuthHeaders();
-
+  async getAudioFeatures(artistId, authHeaders) {
     const tracks = await axios.get(
       `https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=US`,
       authHeaders
@@ -71,14 +76,3 @@ module.exports = class SpotifyApi {
     return audioFeatures;
   }
 };
-
-// (async function () {
-//   const spotify = new SpotifyApi(
-//     '69b69caae3334c56b651a2f714b35f3c',
-//     '728cfe36ae884f18a8da60d95052a130'
-//   );
-//   const artists = await spotify.getArtist('tuna');
-//   const artistTracks = await spotify.getArtistTracks(artists[0].id);
-//   const features = await spotify.getAudioFeatures(artistTracks.join(','));
-//   console.log(features);
-// })();

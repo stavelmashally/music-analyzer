@@ -10,11 +10,3 @@ exports.getArtist = async (req, res) => {
 
   return res.json({ artists });
 };
-
-exports.getAudioFeatures = async (req, res) => {
-  const { artistId } = req.query;
-
-  const audioFeatures = await spotifyApi.getAudioFeatures(artistId);
-
-  return res.json({ audioFeatures });
-};
