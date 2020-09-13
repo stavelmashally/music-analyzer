@@ -45,12 +45,11 @@ module.exports = class SpotifyApi {
     const artists = await Promise.all(
       res.data.artists.items.map(async ({ id, name, images }) => {
         const features = await this.getAudioFeatures(id, authHeaders);
-
         return {
           id,
           name,
           image: images[0],
-          audioFeatures: features,
+          audioFeatures: this.procces(features),
         };
       })
     );
@@ -74,5 +73,39 @@ module.exports = class SpotifyApi {
     const audioFeatures = res.data.audio_features;
 
     return audioFeatures;
+  }
+
+  procces(features) {
+    const featuresResult = {
+      danceability: 0,
+      energy: 0,
+      key: 0,
+      loudness: 0,
+      mode: 0,
+      speechiness: 0,
+      acousticness: 0,
+      instrumentalness: 0,
+      liveness: 0,
+      valence: 0,
+      tempo: 0,
+    };
+
+    // Sum all the values
+    features.forEach(feature => {
+      if (feature) {
+        Object.keys(feature).forEach(key => {
+          if (featuresResult.hasOwnProperty(key)) {
+            featuresResult[key] += feature[key];
+          }
+        });
+      }
+    });
+
+    // Avarage
+    Object.keys(featuresResult).forEach(key => {
+      featuresResult[key] /= features.length;
+    });
+
+    return featuresResult;
   }
 };

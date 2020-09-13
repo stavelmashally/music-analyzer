@@ -7,7 +7,7 @@ const Selections = () => {
 
   const handleDelete = artist => {
     setSelections(prevSelections =>
-      prevSelections.filter(({ id }) => id != artist.id)
+      prevSelections.filter(({ id }) => id !== artist.id)
     );
   };
 

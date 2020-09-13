@@ -7,6 +7,7 @@ const Artist = ({ artist, onArtistSelected }) => {
       <img
         src={artist.image ? artist.image.url : avatar}
         className="ui avatar image"
+        alt="artist avatar"
       />
       <div className="content">
         <div className="header">{artist.name}</div>
