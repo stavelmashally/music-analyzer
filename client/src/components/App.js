@@ -5,6 +5,7 @@ import SearchBar from './SearchBar';
 import ArtistList from './artists/ArtistList';
 import Selections from './Selections';
 import ArtistChart from './charts/ArtistChart';
+import AppInfo from './AppInfo';
 
 import { ArtistProvider } from '../contexts/ArtistContext';
 import { SelectionsProvider } from '../contexts/SelectionsContext';
@@ -12,7 +13,7 @@ import { LoaderProvider } from '../contexts/LoaderContext';
 
 const App = () => {
   return (
-    <div>
+    <>
       <Header />
       <div className="ui container">
         <ArtistProvider>
@@ -25,8 +26,9 @@ const App = () => {
             </SelectionsProvider>
           </LoaderProvider>
         </ArtistProvider>
+        <AppInfo/>
       </div>
-    </div>
+    </>
   );
 };
 
