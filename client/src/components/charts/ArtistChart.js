@@ -10,43 +10,34 @@ import {
   Legend,
   Bar,
 } from 'recharts';
-
+import CustomToolTip from './CustomToolTip';
+import { FEATURES, generateColor } from './chartsConfig';
 import './chart.css';
 
 const formatArtistData = artists => {
-  const features = [
-    'danceability',
-    'energy',
-    'speechiness',
-    'acousticness',
-    'liveness',
-    'valence',
-  ];
-
   const data = [];
 
-  features.forEach(feature => {
-    data.push({
-      name: feature,
-      [artists[0].name]: artists[0].audioFeatures[feature],
-      [artists[1].name]: artists[1].audioFeatures[feature],
-    });
+  FEATURES.forEach(featureName => {
+    const feature = { name: featureName };
+    artists.forEach(
+      artist => (feature[artist.name] = artist.audioFeatures[featureName])
+    );
+    data.push(feature);
   });
 
   return data;
 };
 
 const ArtistChart = () => {
-  const [selections, setSelections] = useContext(SelectionsContext);
+  const selections = useContext(SelectionsContext);
 
   const renderBars = () => {
-    const colors = ['#82ca9d', '#f06400', '#4bbcfe'];
     return selections.map(artist => (
-      <Bar dataKey={artist.name} fill={colors.pop()} />
+      <Bar key={artist.id} dataKey={artist.name} fill={generateColor()} />
     ));
   };
 
-  if (selections.length > 1) {
+  if (selections.length) {
     const data = formatArtistData(selections);
     return (
       <div className="chart-container">
@@ -55,7 +46,7 @@ const ArtistChart = () => {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />
             <YAxis />
-            <Tooltip />
+            <Tooltip content={<CustomToolTip/>}/>
             <Legend />
             {renderBars()}
           </BarChart>
@@ -64,7 +55,11 @@ const ArtistChart = () => {
     );
   }
 
-  return <div>Search for an artists to compare</div>;
+  return (
+    <div>
+      <h3>Search for artists to make a comparison</h3>
+    </div>
+  );
 };
 
 export default ArtistChart;

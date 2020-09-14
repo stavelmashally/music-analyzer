@@ -1,7 +1,7 @@
 import React from 'react';
 import avatar from '../../images/avatar-placeholder.png';
 
-const Artist = ({ artist, onArtistSelected }) => {
+const Artist = ({ artist, onArtistSelected, showDelete }) => {
   return (
     <div className="item" onClick={() => onArtistSelected(artist)}>
       <img
@@ -10,7 +10,9 @@ const Artist = ({ artist, onArtistSelected }) => {
         alt="artist avatar"
       />
       <div className="content">
-        <div className="header">{artist.name}</div>
+        <div className="header">
+          {showDelete ? `${artist.name} x` : artist.name}
+        </div>
       </div>
     </div>
   );

@@ -101,9 +101,9 @@ module.exports = class SpotifyApi {
       }
     });
 
-    // Avarage
+    // Average
     Object.keys(featuresResult).forEach(key => {
-      featuresResult[key] /= features.length;
+      featuresResult[key] = Number((featuresResult[key] / features.length).toFixed(3));
     });
 
     return featuresResult;

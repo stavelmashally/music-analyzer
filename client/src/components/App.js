@@ -4,7 +4,7 @@ import Header from './Header';
 import SearchBar from './SearchBar';
 import ArtistList from './artists/ArtistList';
 import Selections from './Selections';
-import ArtistChart from './artists/ArtistChart';
+import ArtistChart from './charts/ArtistChart';
 
 import { ArtistProvider } from '../contexts/ArtistContext';
 import { SelectionsProvider } from '../contexts/SelectionsContext';

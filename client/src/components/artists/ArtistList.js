@@ -1,14 +1,18 @@
 import React, { useContext } from 'react';
-import { ArtistContext } from '../../contexts/ArtistContext';
-import { SelectionsContext } from '../../contexts/SelectionsContext';
+import { ArtistContext, ArtistDispatcher } from '../../contexts/ArtistContext';
+import { SelectionsDispatcher } from '../../contexts/SelectionsContext';
 import Artist from './Artist';
 
 const ArtistList = () => {
-  const [artists, setArtists] = useContext(ArtistContext);
-  const [selections, setSelections] = useContext(SelectionsContext);
+  const artists = useContext(ArtistContext);
+  const setArtists = useContext(ArtistDispatcher);
+  const setSelections = useContext(SelectionsDispatcher);
 
   const handleSelection = artist => {
-    setSelections(prevSelections => [...prevSelections, artist]);
+    setSelections(prevSelections => {
+      const exists = !!prevSelections.find(({ id }) => artist.id === id);
+      return !exists ? [...prevSelections, artist] : [...prevSelections];
+    });
     setArtists([]);
   };
 

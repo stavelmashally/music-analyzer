@@ -1,9 +1,13 @@
 import React, { useContext } from 'react';
-import { SelectionsContext } from '../contexts/SelectionsContext';
+import {
+  SelectionsContext,
+  SelectionsDispatcher,
+} from '../contexts/SelectionsContext';
 import Artist from './artists/Artist';
 
 const Selections = () => {
-  const [selections, setSelections] = useContext(SelectionsContext);
+  const selections = useContext(SelectionsContext);
+  const setSelections = useContext(SelectionsDispatcher);
 
   const handleDelete = artist => {
     setSelections(prevSelections =>
@@ -13,12 +17,12 @@ const Selections = () => {
 
   const renderSelections = () => {
     return selections.map(artist => (
-      <Artist key={artist.id} artist={artist} onArtistSelected={handleDelete} />
+      <Artist key={artist.id} artist={artist} showDelete onArtistSelected={handleDelete} />
     ));
   };
 
   return (
-    <ul className="ui large horizontal selection list">{renderSelections()}</ul>
+    <div className="ui large horizontal selection list">{renderSelections()}</div>
   );
 };
 

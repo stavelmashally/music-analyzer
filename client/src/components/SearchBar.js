@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { ArtistContext } from '../contexts/ArtistContext';
-import { LoaderContext } from '../contexts/LoaderContext';
+import { ArtistDispatcher } from '../contexts/ArtistContext';
+import { LoaderDispatcher } from '../contexts/LoaderContext';
 import axios from 'axios';
 
 const SearchBar = () => {
   const [term, setTerm] = useState('');
-  const [artists, setArtists] = useContext(ArtistContext);
-  const [loading, setLoading] = useContext(LoaderContext);
+  const setArtists = useContext(ArtistDispatcher);
+  const setLoading = useContext(LoaderDispatcher);
 
   const updateTerm = e => {
     setTerm(e.target.value);
@@ -16,7 +16,7 @@ const SearchBar = () => {
     if (term.length) {
       setLoading(true);
       const res = await axios.get(`/api/artists?name=${term}`);
-      setArtists(prevArtists => res.data.artists);
+      setArtists(res.data.artists);
       setTerm('');
       setLoading(false);
     }

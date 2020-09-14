@@ -6,7 +6,10 @@ const spotifyApi = new SpotifyApi(keys.clientId, keys.clientSecret);
 exports.getArtist = async (req, res) => {
   const { name } = req.query;
 
-  const artists = await spotifyApi.getArtist(name);
-
-  return res.json({ artists });
+  try {
+    const artists = await spotifyApi.getArtist(name);
+    return res.json({ artists });
+  } catch (error) {
+    return res.json({ artists: [] });
+  }
 };

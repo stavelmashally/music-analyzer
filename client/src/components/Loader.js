@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Loader = props => {
-  if (props.showLoader) {
+const Loader = ({ showLoader, message }) => {
+  if (showLoader) {
     return (
       <div className="ui active inverted dimmer">
-        <div className="ui big text loader">{props.message}</div>
+        <div className="ui big text loader">{message}</div>
       </div>
     );
   }
