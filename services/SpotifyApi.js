@@ -25,11 +25,11 @@ module.exports = class SpotifyApi {
       }
     );
 
-    const accessToken = res.data.access_token;
+    const { access_token } = res.data;
 
     return {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${access_token}`,
       },
     };
   }
@@ -42,37 +42,40 @@ module.exports = class SpotifyApi {
       authHeaders
     );
 
-    const artists = await Promise.all(
-      res.data.artists.items.map(async ({ id, name, images }) => {
-        const features = await this.getAudioFeatures(id, authHeaders);
-        return {
-          id,
-          name,
-          image: images[0],
-          audioFeatures: this.procces(features),
-        };
-      })
-    );
+    const { artists } = res.data;
 
-    return artists;
+    // Get audio features for each artist
+    const artistsFeatures = artists.items.map(async ({ id, name, images }) => {
+      const features = await this.getAudioFeatures(id, authHeaders);
+      return {
+        id,
+        name,
+        image: images[0],
+        audioFeatures: this.procces(features),
+      };
+    });
+
+    return Promise.all(artistsFeatures);
   }
 
   async getAudioFeatures(artistId, authHeaders) {
-    const tracks = await axios.get(
+    const res = await axios.get(
       `https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=US`,
       authHeaders
     );
 
-    const trackIds = tracks.data.tracks.map(track => track.id).join(',');
+    const { tracks } = res.data;
+    // Spotify accepts comma seperated list of ids
+    const formattedIds = tracks.map(track => track.id).join(',');
 
-    const res = await axios.get(
-      `https://api.spotify.com/v1/audio-features/?ids=${trackIds}`,
+    const response = await axios.get(
+      `https://api.spotify.com/v1/audio-features/?ids=${formattedIds}`,
       authHeaders
     );
 
-    const audioFeatures = res.data.audio_features;
+    const { audio_features } = response.data;
 
-    return audioFeatures;
+    return audio_features;
   }
 
   procces(features) {
@@ -103,7 +106,9 @@ module.exports = class SpotifyApi {
 
     // Average
     Object.keys(featuresResult).forEach(key => {
-      featuresResult[key] = Number((featuresResult[key] / features.length).toFixed(3));
+      featuresResult[key] = Number(
+        (featuresResult[key] / features.length).toFixed(3)
+      );
     });
 
     return featuresResult;
