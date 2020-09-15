@@ -13,10 +13,12 @@ const SearchBar = () => {
   };
 
   const fetchArtists = async () => {
-    if (term.length) {
+    const artistName = term.trim();
+    if (artistName.length) {
       setLoading(true);
       const res = await axios.get(`/api/artists?name=${term}`);
-      setArtists(res.data.artists);
+      const { artists } = res.data;
+      setArtists(artists);
       setTerm('');
       setLoading(false);
     }

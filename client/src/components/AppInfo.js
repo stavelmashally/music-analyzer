@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const AppInfo = () => {
   return (
@@ -9,10 +9,10 @@ const AppInfo = () => {
       </p>
       <p>
         Feel free to use this project on
-        <a href="https://developer.spotify.com/"> GitHub.</a>
+        <a href="https://github.com/stavelmashally/music-analyzer"> GitHub.</a>
       </p>
     </div>
   );
-}
+};
 
-export default AppInfo
+export default AppInfo;
