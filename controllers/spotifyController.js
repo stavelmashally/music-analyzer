@@ -8,6 +8,7 @@ exports.getArtist = async (req, res) => {
 
   try {
     const artists = await spotifyApi.getArtist(name);
+    
     return res.json({ artists });
   } catch (error) {
     return res

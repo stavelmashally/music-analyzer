@@ -1,5 +1,10 @@
+const express = require('express');
+
 const spotifyCtrl = require('../controllers/spotifyController');
 
-module.exports = app => {
-  app.get('/api/artists/', spotifyCtrl.getArtist);
+exports.getRoutes = () => {
+  const router = express.Router();
+  router.get('/artists/', spotifyCtrl.getArtist);
+
+  return router;
 };

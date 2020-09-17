@@ -10,44 +10,32 @@ import {
   Legend,
   Bar,
 } from 'recharts';
+import CustomizedAxisTick from './CustomizedAxisTick';
 import CustomToolTip from './CustomToolTip';
-import { FEATURES, generateColor } from './chartsConfig';
+import { formatData, generateColor } from './chartsConfig';
 import './chart.css';
-
-const formatArtistData = artists => {
-  const data = [];
-
-  FEATURES.forEach(featureName => {
-    const feature = { name: featureName };
-    artists.forEach(
-      artist => (feature[artist.name] = artist.audioFeatures[featureName])
-    );
-    data.push(feature);
-  });
-
-  return data;
-};
 
 const ArtistChart = () => {
   const selections = useContext(SelectionsContext);
 
   const renderBars = () => {
-    return selections.map(artist => (
-      <Bar key={artist.id} dataKey={artist.name} fill={generateColor()} />
+    return selections.map(({ id, name }) => (
+      <Bar key={id} dataKey={name} fill={generateColor()} />
     ));
   };
 
   if (selections.length) {
-    const data = formatArtistData(selections);
+    const data = formatData(selections);
+
     return (
       <div className="chart-container">
-        <ResponsiveContainer width="100%" height={400}>
+        <ResponsiveContainer width="100%" height={450}>
           <BarChart width={100} height={400} data={data}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
+            <XAxis dataKey="name" interval={0} tick={<CustomizedAxisTick />} />
             <YAxis />
-            <Tooltip content={<CustomToolTip/>}/>
-            <Legend />
+            <Tooltip content={<CustomToolTip />} />
+            <Legend wrapperStyle={{ paddingTop: '30px' }} />
             {renderBars()}
           </BarChart>
         </ResponsiveContainer>

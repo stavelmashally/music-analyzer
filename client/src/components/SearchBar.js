@@ -6,6 +6,7 @@ import axios from 'axios';
 const SearchBar = () => {
   const [term, setTerm] = useState('');
   const [error, setError] = useState(null);
+
   const setArtists = useContext(ArtistDispatcher);
   const setLoading = useContext(LoaderDispatcher);
 
@@ -13,10 +14,12 @@ const SearchBar = () => {
     setTerm(e.target.value);
   };
 
-  const fetchArtists = async () => {
+  const fetchArtists = async e => {
+    e.preventDefault();
     const artistName = term.trim();
     if (artistName.length) {
       setLoading(true);
+
       try {
         const res = await axios.get(`/api/artists?name=${term}`);
         const { artists } = res.data;
@@ -31,24 +34,24 @@ const SearchBar = () => {
     setLoading(false);
   };
 
-  const renderError = () => {
-    return <div className="ui red mini message">{error}</div>;
-  };
-
   return (
     <div>
-      <div className="ui big fluid action input" style={{ marginTop: '30px' }}>
+      <form
+        className="ui big fluid action input"
+        style={{ marginTop: '30px' }}
+        onSubmit={fetchArtists}
+      >
         <input
           type="text"
           placeholder="Artist name"
           value={term}
           onChange={updateTerm}
         />
-        <button className="ui big button" onClick={fetchArtists}>
+        <button className="ui big button" type="submit">
           Search
         </button>
-      </div>
-      {error && renderError()}
+      </form>
+      {error && <div className="ui red mini message">{error}</div>}
     </div>
   );
 };

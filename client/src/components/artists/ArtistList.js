@@ -16,21 +16,19 @@ const ArtistList = () => {
     setArtists([]);
   };
 
-  const renderArtists = () => {
-    return artists.map(artist => (
-      <Artist
-        key={artist.id}
-        artist={artist}
-        onArtistSelected={handleSelection}
-      />
-    ));
-  };
-
-  return (
-    <div className="ui large middle aligned selection list">
-      {renderArtists()}
-    </div>
+  const renderArtist = artist => (
+    <Artist
+      key={artist.id}
+      artist={artist}
+      onArtistSelected={handleSelection}
+    />
   );
+
+  return artists.length ? (
+    <div className="ui large middle aligned selection list">
+      {artists.map(renderArtist)}
+    </div>
+  ) : null;
 };
 
 export default ArtistList;

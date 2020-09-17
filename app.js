@@ -1,13 +1,14 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const { json } = require('body-parser');
 const logger = require('./middlewares/logger');
+const { getRoutes } = require('./routes');
 
 const app = express();
 
 app.use(logger());
-app.use(bodyParser.json());
+app.use(json());
 
-require('./routes')(app);
+app.use('/api', getRoutes());
 
 if (process.env.NODE_ENV === 'production') {
   // Serve up production assets
