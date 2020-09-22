@@ -1,9 +1,9 @@
 import React from 'react';
 import avatar from '../../images/avatar-placeholder.png';
 
-const Artist = ({ artist, onArtistSelected, showDelete }) => {
+const Artist = ({ artist, onSelected, showDelete }) => {
   return (
-    <div className="item" onClick={() => onArtistSelected(artist)}>
+    <div className="item" onClick={() => onSelected(artist)}>
       <img
         src={artist.image ? artist.image.url : avatar}
         className="ui avatar image"

@@ -3,30 +3,27 @@ import React from 'react';
 import Header from './Header';
 import SearchBar from './SearchBar';
 import ArtistList from './artists/ArtistList';
-import Selections from './Selections';
+import SelectionList from './SelectionList';
 import ArtistChart from './charts/ArtistChart';
 import AppInfo from './AppInfo';
 
-import { ArtistProvider } from '../contexts/ArtistContext';
-import { SelectionsProvider } from '../contexts/SelectionsContext';
-import { LoaderProvider } from '../contexts/LoaderContext';
+import { ArtistProvider } from '../contexts/artists/ArtistContext';
+import { SelectionsProvider } from '../contexts/selections/SelectionsContext';
 
 const App = () => {
   return (
     <>
       <Header />
       <div className="ui container">
-        <ArtistProvider>
-          <LoaderProvider>
+          <ArtistProvider>
             <SearchBar />
             <SelectionsProvider>
               <ArtistList />
-              <Selections />
+              <SelectionList />
               <ArtistChart />
             </SelectionsProvider>
-          </LoaderProvider>
-        </ArtistProvider>
-        <AppInfo/>
+          </ArtistProvider>
+        <AppInfo />
       </div>
     </>
   );

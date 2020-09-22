@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { SelectionsContext } from '../../contexts/SelectionsContext';
+import { SelectionsContext } from '../../contexts/selections/SelectionsContext';
 import {
   ResponsiveContainer,
   BarChart,
@@ -12,21 +12,19 @@ import {
 } from 'recharts';
 import CustomizedAxisTick from './CustomizedAxisTick';
 import CustomToolTip from './CustomToolTip';
-import { formatData, generateColor } from './chartsConfig';
+import { formatData, generateColor } from './helper';
 import './chart.css';
 
 const ArtistChart = () => {
-  const selections = useContext(SelectionsContext);
+  const { selections } = useContext(SelectionsContext);
 
-  const renderBars = () => {
-    return selections.map(({ id, name }) => (
+  const renderBars = () =>
+    selections.map(({ id, name }) => (
       <Bar key={id} dataKey={name} fill={generateColor()} />
     ));
-  };
 
   if (selections.length) {
     const data = formatData(selections);
-
     return (
       <div className="chart-container">
         <ResponsiveContainer width="100%" height={450}>

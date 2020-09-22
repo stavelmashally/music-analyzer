@@ -1,29 +1,21 @@
 import React, { useContext } from 'react';
-import { ArtistContext, ArtistDispatcher } from '../../contexts/ArtistContext';
-import { SelectionsDispatcher } from '../../contexts/SelectionsContext';
+import { ArtistContext } from '../../contexts/artists/ArtistContext';
+import { SelectionsContext } from '../../contexts/selections/SelectionsContext';
 import Artist from './Artist';
 
 const ArtistList = () => {
-  const artists = useContext(ArtistContext);
-  const setArtists = useContext(ArtistDispatcher);
-  const setSelections = useContext(SelectionsDispatcher);
+  const { artists, setArtists } = useContext(ArtistContext);
+  const { addSelection } = useContext(SelectionsContext);
 
   const handleSelection = artist => {
-    setSelections(prevSelections => {
-      const exists = !!prevSelections.find(({ id }) => artist.id === id);
-      return !exists ? [...prevSelections, artist] : [...prevSelections];
-    });
+    addSelection(artist);
     setArtists([]);
   };
 
   const renderArtist = artist => (
-    <Artist
-      key={artist.id}
-      artist={artist}
-      onArtistSelected={handleSelection}
-    />
+    <Artist key={artist.id} artist={artist} onSelected={handleSelection} />
   );
-
+  
   return artists.length ? (
     <div className="ui large middle aligned selection list">
       {artists.map(renderArtist)}

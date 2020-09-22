@@ -1,37 +1,18 @@
 import React, { useState, useContext } from 'react';
-import { ArtistDispatcher } from '../contexts/ArtistContext';
-import { LoaderDispatcher } from '../contexts/LoaderContext';
-import axios from 'axios';
+import { ArtistContext } from '../contexts/artists/ArtistContext';
 
 const SearchBar = () => {
   const [term, setTerm] = useState('');
-  const [error, setError] = useState(null);
 
-  const setArtists = useContext(ArtistDispatcher);
-  const setLoading = useContext(LoaderDispatcher);
+  const { fetchArtists, error } = useContext(ArtistContext);
 
-  const updateTerm = e => {
-    setTerm(e.target.value);
-  };
+  const updateTerm = e => setTerm(e.target.value);
 
-  const fetchArtists = async e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const artistName = term.trim();
-    if (artistName.length) {
-      setLoading(true);
-
-      try {
-        const res = await axios.get(`/api/artists?name=${term}`);
-        const { artists } = res.data;
-        setArtists(artists);
-        setError(null);
-      } catch (error) {
-        setArtists([]);
-        setError(error.response.data.error);
-      }
-    }
+    if (artistName.length) fetchArtists(artistName);
     setTerm('');
-    setLoading(false);
   };
 
   return (
@@ -39,7 +20,7 @@ const SearchBar = () => {
       <form
         className="ui big fluid action input"
         style={{ marginTop: '30px' }}
-        onSubmit={fetchArtists}
+        onSubmit={handleSubmit}
       >
         <input
           type="text"

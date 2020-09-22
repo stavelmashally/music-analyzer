@@ -106,9 +106,8 @@ module.exports = class SpotifyApi {
 
     // Average
     Object.keys(featuresResult).forEach(key => {
-      featuresResult[key] = Number(
-        (featuresResult[key] / features.length).toFixed(3)
-      );
+      const avg = (featuresResult[key] / features.length).toFixed(3);
+      featuresResult[key] = +avg;
     });
 
     return featuresResult;

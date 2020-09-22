@@ -11,6 +11,7 @@ exports.getArtist = async (req, res) => {
     
     return res.json({ artists });
   } catch (error) {
+    console.log(error)
     return res
       .status(400)
       .json({ error: 'Please provide a valid english artist name' });
