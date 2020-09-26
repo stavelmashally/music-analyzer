@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext } from 'react';
 import { SelectionsContext } from '../../contexts';
 import {
   ResponsiveContainer,
@@ -23,7 +23,6 @@ const ArtistChart = () => {
       <Bar key={id} dataKey={name} fill={generateColor()} />
     ));
 
-  console.log('artistChart render');
   if (selections.length) {
     const data = formatData(selections);
     return (

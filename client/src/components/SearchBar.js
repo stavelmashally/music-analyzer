@@ -15,7 +15,6 @@ const SearchBar = () => {
     setTerm('');
   };
 
-  console.log('SearchBar render');
   return (
     <div>
       <form

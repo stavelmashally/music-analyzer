@@ -15,7 +15,6 @@ const ArtistList = () => {
   const renderArtist = artist => (
     <Artist key={artist.id} artist={artist} onSelected={handleSelection} />
   );
-  console.log('ArtistList render');
 
   if (isLoading) return <Loader/>;
 

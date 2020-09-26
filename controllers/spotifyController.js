@@ -1,17 +1,12 @@
-const keys = require('../config/keys');
-const SpotifyApi = require('../services/SpotifyApi');
+const { getArtistsFeatures } = require('../services/SpotifyApi');
 
-const spotifyApi = new SpotifyApi(keys.clientId, keys.clientSecret);
-
-exports.getArtist = async (req, res) => {
+exports.getArtists = async (req, res) => {
   const { name } = req.query;
 
   try {
-    const artists = await spotifyApi.getArtist(name);
-    
+    const artists = await getArtistsFeatures(name);
     return res.json({ artists });
   } catch (error) {
-    console.log(error)
     return res
       .status(400)
       .json({ error: 'Please provide a valid english artist name' });
