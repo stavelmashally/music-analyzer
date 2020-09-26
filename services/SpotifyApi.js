@@ -51,7 +51,7 @@ module.exports = class SpotifyApi {
         id,
         name,
         image: images[0],
-        audioFeatures: this.procces(features),
+        audioFeatures: this.proccesArtistData(features),
       };
     });
 
@@ -65,6 +65,7 @@ module.exports = class SpotifyApi {
     );
 
     const { tracks } = res.data;
+
     // Spotify accepts comma seperated list of ids
     const formattedIds = tracks.map(track => track.id).join(',');
 
@@ -78,7 +79,7 @@ module.exports = class SpotifyApi {
     return audio_features;
   }
 
-  procces(features) {
+  proccesArtistData(features) {
     const featuresResult = {
       danceability: 0,
       energy: 0,

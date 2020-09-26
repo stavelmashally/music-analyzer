@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { ArtistContext } from '../contexts/artists/ArtistContext';
+import { ArtistContext } from '../contexts';
 
 const SearchBar = () => {
   const [term, setTerm] = useState('');
@@ -15,6 +15,7 @@ const SearchBar = () => {
     setTerm('');
   };
 
+  console.log('SearchBar render');
   return (
     <div>
       <form

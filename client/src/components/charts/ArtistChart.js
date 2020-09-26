@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { SelectionsContext } from '../../contexts/selections/SelectionsContext';
+import React, { useContext, useMemo } from 'react';
+import { SelectionsContext } from '../../contexts';
 import {
   ResponsiveContainer,
   BarChart,
@@ -23,6 +23,7 @@ const ArtistChart = () => {
       <Bar key={id} dataKey={name} fill={generateColor()} />
     ));
 
+  console.log('artistChart render');
   if (selections.length) {
     const data = formatData(selections);
     return (
@@ -43,7 +44,9 @@ const ArtistChart = () => {
 
   return (
     <div>
-      <h3>Search for artists to make a comparison</h3>
+      <h3 style={{ marginTop: '10px' }}>
+        Search for artists to make a comparison
+      </h3>
     </div>
   );
 };

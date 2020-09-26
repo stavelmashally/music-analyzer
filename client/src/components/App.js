@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { ArtistProvider, SelectionsProvider } from '../contexts';
 import Header from './Header';
 import SearchBar from './SearchBar';
 import ArtistList from './artists/ArtistList';
@@ -7,8 +7,6 @@ import SelectionList from './SelectionList';
 import ArtistChart from './charts/ArtistChart';
 import AppInfo from './AppInfo';
 
-import { ArtistProvider } from '../contexts/artists/ArtistContext';
-import { SelectionsProvider } from '../contexts/selections/SelectionsContext';
 
 const App = () => {
   return (

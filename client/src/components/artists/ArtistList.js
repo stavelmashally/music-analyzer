@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { ArtistContext } from '../../contexts/artists/ArtistContext';
-import { SelectionsContext } from '../../contexts/selections/SelectionsContext';
+import { ArtistContext, SelectionsContext } from '../../contexts';
 import Artist from './Artist';
+import Loader from '../Loader';
 
 const ArtistList = () => {
-  const { artists, setArtists } = useContext(ArtistContext);
+  const { artists, setArtists, isLoading } = useContext(ArtistContext);
   const { addSelection } = useContext(SelectionsContext);
 
   const handleSelection = artist => {
@@ -15,7 +15,10 @@ const ArtistList = () => {
   const renderArtist = artist => (
     <Artist key={artist.id} artist={artist} onSelected={handleSelection} />
   );
-  
+  console.log('ArtistList render');
+
+  if (isLoading) return <Loader/>;
+
   return artists.length ? (
     <div className="ui large middle aligned selection list">
       {artists.map(renderArtist)}

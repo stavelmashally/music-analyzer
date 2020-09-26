@@ -1,33 +1,29 @@
-import React, { useReducer, createContext, useState} from 'react';
+import React, { useReducer, createContext } from 'react';
+import { LOADING, SET_ARTISTS, FETCH_FAILURE } from './types';
 import artistsReducer from './artistsReducer';
-import Loader from '../../components/Loader';
 import axios from 'axios';
-
-export const SET_ARTISTS = 'set_artists';
-export const FETCH_FAILURE = 'fetch_failure';
 
 const initialState = {
   artists: [],
+  isLoading: false,
   error: null,
 };
 
 export const ArtistContext = createContext(initialState);
 
-export const  ArtistProvider = ({ children }) => {
+export const ArtistProvider = ({ children }) => {
   const [state, dispatch] = useReducer(artistsReducer, initialState);
-  const [loading, setLoading] = useState(false);
 
   // Actions
   async function fetchArtists(name) {
     try {
-      setLoading(true);
+      dispatch({ type: LOADING, payload: true });
       const res = await axios.get(`/api/artists?name=${name}`);
       const { artists } = res.data;
       dispatch({ type: SET_ARTISTS, payload: artists });
     } catch (error) {
       dispatch({ type: FETCH_FAILURE, payload: error.response.data.error });
     }
-    setLoading(false);
   }
 
   function setArtists(artists) {
@@ -38,13 +34,13 @@ export const  ArtistProvider = ({ children }) => {
     <ArtistContext.Provider
       value={{
         artists: state.artists,
+        isLoading: state.isLoading,
         error: state.error,
         setArtists,
         fetchArtists,
       }}
     >
       {children}
-      {loading && <Loader />}
     </ArtistContext.Provider>
   );
 };

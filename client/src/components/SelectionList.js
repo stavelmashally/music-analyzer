@@ -15,7 +15,7 @@ const SelectionList = () => {
       onSelected={handleDelete}
     />
   );
-
+console.log('SelectionList render');
   return (
     <div className="ui large horizontal selection list">
       {selections.map(renderArtist)}
