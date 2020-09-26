@@ -16,7 +16,12 @@ const ArtistList = () => {
     <Artist key={artist.id} artist={artist} onSelected={handleSelection} />
   );
 
-  if (isLoading) return <Loader/>;
+  if (isLoading)
+    return (
+      <div style={{ marginTop: '10px' }}>
+        <Loader />
+      </div>
+    );
 
   return artists.length ? (
     <div className="ui large middle aligned selection list">
