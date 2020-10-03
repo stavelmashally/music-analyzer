@@ -11,7 +11,7 @@ const Artist = ({ artist, onSelected, showDelete }) => {
       />
       <div className="content">
         <div className="header">
-          {showDelete ? `${artist.name} x` : artist.name}
+          <h4>{showDelete ? `${artist.name} x` : artist.name}</h4>
         </div>
       </div>
     </div>

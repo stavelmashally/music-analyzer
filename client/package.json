@@ -9,9 +9,11 @@
     "axios": "^0.20.0",
     "http-proxy-middleware": "^1.0.5",
     "react": "^16.13.1",
+    "react-dark-mode-toggle": "0.0.10",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
-    "recharts": "^1.8.5"
+    "recharts": "^1.8.5",
+    "styled-components": "^5.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

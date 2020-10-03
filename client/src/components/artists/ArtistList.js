@@ -24,7 +24,7 @@ const ArtistList = () => {
     );
 
   return artists.length ? (
-    <div className="ui large middle aligned selection list">
+    <div className="ui big middle aligned selection list">
       {artists.map(renderArtist)}
     </div>
   ) : null;

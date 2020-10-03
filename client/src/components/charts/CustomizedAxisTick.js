@@ -6,12 +6,12 @@ const CustomizedAxisTick = props => {
   return (
     <g transform={`translate(${x},${y})`}>
       <text
+        style={{ color: 'white' }}
         x={0}
         y={0}
         dy={10}
         textAnchor="end"
         fontSize="12px"
-        fill="#666"
         transform="rotate(-20)"
       >
         {payload.value}

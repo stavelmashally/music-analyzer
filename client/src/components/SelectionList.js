@@ -17,7 +17,7 @@ const SelectionList = () => {
   );
 
   return (
-    <div className="ui large horizontal selection list">
+    <div className="ui big horizontal selection list">
       {selections.map(renderArtist)}
     </div>
   );

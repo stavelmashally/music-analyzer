@@ -1,11 +1,7 @@
 import React from 'react';
 
-const Loader = ({ message }) => {
-  return <div className="ui active inline loader"></div>;
-};
-
-Loader.defaultProps = {
-  message: 'Loading...',
+const Loader = () => {
+return <div className="ui active inline loader">{}</div>;
 };
 
 export default Loader;

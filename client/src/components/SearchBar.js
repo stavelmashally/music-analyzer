@@ -18,7 +18,7 @@ const SearchBar = () => {
   return (
     <div>
       <form
-        className="ui big fluid action input"
+        className="ui big fluid input"
         style={{ marginTop: '30px' }}
         onSubmit={handleSubmit}
       >
@@ -28,7 +28,7 @@ const SearchBar = () => {
           value={term}
           onChange={updateTerm}
         />
-        <button className="ui big button" type="submit">
+        <button className="ui violet big button" type="submit">
           Search
         </button>
       </form>

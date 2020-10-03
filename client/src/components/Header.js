@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../contexts';
+import DarkModeToggle from 'react-dark-mode-toggle';
 import logo from '../images/audio-logo.png';
 
 const Header = () => {
+  const { theme, toggleTheme } = useContext(AppContext);
+
+  const isDarkMode = theme === 'dark';
+  
   return (
-    <div className="ui inverted menu">
+    <div className="ui violet inverted big menu">
       <a className="header item" href="/">
         <img
           src={logo}
@@ -14,6 +20,15 @@ const Header = () => {
         />
         Music Analyzer
       </a>
+      <div className="right menu">
+        <div className="menu item">
+          <DarkModeToggle
+            onChange={toggleTheme}
+            checked={isDarkMode}
+            size={60}
+          />
+        </div>
+      </div>
     </div>
   );
 };
