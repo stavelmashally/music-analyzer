@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
-import { SelectionsContext } from '../contexts/selections/SelectionsContext';
+import React from 'react';
+import { useArtist, deleteSelection } from '../contexts/ArtistContext';
 import Artist from './artists/Artist';
 
 const SelectionList = () => {
-  const { selections, deleteSelection } = useContext(SelectionsContext);
+  const { selections, setSelections } = useArtist();
 
-  const handleDelete = ({ id }) => deleteSelection(id);
+  const handleDelete = ({ id }) => deleteSelection(setSelections, id);
 
   const renderArtist = artist => (
     <Artist

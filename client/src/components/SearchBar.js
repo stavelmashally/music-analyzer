@@ -1,17 +1,19 @@
-import React, { useState, useContext } from 'react';
-import { ArtistContext } from '../contexts';
+import React, { useState } from 'react';
+import { useArtist, fetchArtists } from '../contexts/ArtistContext';
 
 const SearchBar = () => {
   const [term, setTerm] = useState('');
-
-  const { fetchArtists, error } = useContext(ArtistContext);
+  const { dispatch } = useArtist();
 
   const updateTerm = e => setTerm(e.target.value);
 
   const handleSubmit = async e => {
     e.preventDefault();
     const artistName = term.trim();
-    if (artistName.length) fetchArtists(artistName);
+    if (!artistName) {
+      return;
+    }
+    fetchArtists(dispatch, artistName);
     setTerm('');
   };
 
@@ -32,7 +34,6 @@ const SearchBar = () => {
           Search
         </button>
       </form>
-      {error && <div className="ui red mini message">{error}</div>}
     </div>
   );
 };

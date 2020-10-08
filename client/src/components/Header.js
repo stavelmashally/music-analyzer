@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../contexts';
+import React  from 'react';
+import { useApp } from '../contexts/AppContext';
 import DarkModeToggle from 'react-dark-mode-toggle';
 import logo from '../images/audio-logo.png';
 
 const Header = () => {
-  const { theme, toggleTheme } = useContext(AppContext);
+  const { theme, toggleTheme } = useApp();
 
   const isDarkMode = theme === 'dark';
-  
+
   return (
     <div className="ui violet inverted big menu">
       <a className="header item" href="/">
