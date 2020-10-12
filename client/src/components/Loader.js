@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 const Loader = () => {
-return <div className="ui active inline loader">{}</div>;
-};
+  return <div className="ui active inline loader">{}</div>
+}
 
-export default Loader;
+export default Loader

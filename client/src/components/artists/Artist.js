@@ -1,7 +1,7 @@
-import React from 'react';
-import avatar from '../../images/avatar-placeholder.png';
+import React from 'react'
+import avatar from '../../images/avatar-placeholder.png'
 
-const Artist = ({ artist, onSelected, showDelete }) => {
+const Artist = ({artist, onSelected, showDelete}) => {
   return (
     <div className="item" onClick={() => onSelected(artist)}>
       <img
@@ -15,7 +15,7 @@ const Artist = ({ artist, onSelected, showDelete }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Artist;
+export default Artist

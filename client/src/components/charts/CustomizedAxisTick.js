@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 
 const CustomizedAxisTick = props => {
-  const { x, y, payload } = props;
+  const {x, y, payload} = props
 
   return (
     <g transform={`translate(${x},${y})`}>
       <text
-        style={{ color: 'white' }}
+        style={{color: 'white'}}
         x={0}
         y={0}
         dy={10}
@@ -17,7 +17,7 @@ const CustomizedAxisTick = props => {
         {payload.value}
       </text>
     </g>
-  );
-};
+  )
+}
 
-export default CustomizedAxisTick;
+export default CustomizedAxisTick

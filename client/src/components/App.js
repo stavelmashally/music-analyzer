@@ -1,12 +1,12 @@
-import React from 'react';
-import { AppProvider } from '../contexts/AppContext';
-import { ArtistProvider } from '../contexts/ArtistContext';
-import Header from './Header';
-import SearchBar from './SearchBar';
-import ArtistList from './artists/ArtistList';
-import SelectionList from './SelectionList';
-import ArtistChart from './charts/ArtistChart';
-import AppInfo from './AppInfo';
+import React from 'react'
+import {AppProvider} from '../contexts/AppContext'
+import {ArtistProvider} from '../contexts/ArtistContext'
+import Header from './Header'
+import SearchBar from './SearchBar'
+import ArtistList from './artists/ArtistList'
+import SelectionList from './SelectionList'
+import ArtistChart from './charts/ArtistChart'
+import AppInfo from './AppInfo'
 
 const App = () => (
   <>
@@ -23,5 +23,5 @@ const App = () => (
       </div>
     </AppProvider>
   </>
-);
-export default App;
+)
+export default App

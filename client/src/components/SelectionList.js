@@ -1,11 +1,11 @@
-import React from 'react';
-import { useArtist, deleteSelection } from '../contexts/ArtistContext';
-import Artist from './artists/Artist';
+import React from 'react'
+import {useArtist, deleteSelection} from '../contexts/ArtistContext'
+import Artist from './artists/Artist'
 
 const SelectionList = () => {
-  const { selections, setSelections } = useArtist();
+  const {selections, setSelections} = useArtist()
 
-  const handleDelete = ({ id }) => deleteSelection(setSelections, id);
+  const handleDelete = ({id}) => deleteSelection(setSelections, id)
 
   const renderArtist = artist => (
     <Artist
@@ -14,13 +14,13 @@ const SelectionList = () => {
       showDelete
       onSelected={handleDelete}
     />
-  );
+  )
 
   return (
     <div className="ui big horizontal selection list">
       {selections.map(renderArtist)}
     </div>
-  );
-};
+  )
+}
 
-export default SelectionList;
+export default SelectionList

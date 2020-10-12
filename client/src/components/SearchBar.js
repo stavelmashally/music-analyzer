@@ -1,27 +1,27 @@
-import React, { useState } from 'react';
-import { useArtist, fetchArtists } from '../contexts/ArtistContext';
+import React, {useState} from 'react'
+import {useArtist, fetchArtists} from '../contexts/ArtistContext'
 
 const SearchBar = () => {
-  const [term, setTerm] = useState('');
-  const { dispatch } = useArtist();
+  const [term, setTerm] = useState('')
+  const {dispatch} = useArtist()
 
-  const updateTerm = e => setTerm(e.target.value);
+  const updateTerm = e => setTerm(e.target.value)
 
   const handleSubmit = async e => {
-    e.preventDefault();
-    const artistName = term.trim();
+    e.preventDefault()
+    const artistName = term.trim()
     if (!artistName) {
-      return;
+      return
     }
-    fetchArtists(dispatch, artistName);
-    setTerm('');
-  };
+    fetchArtists(dispatch, artistName)
+    setTerm('')
+  }
 
   return (
     <div>
       <form
         className="ui big fluid input"
-        style={{ marginTop: '30px' }}
+        style={{marginTop: '30px'}}
         onSubmit={handleSubmit}
       >
         <input
@@ -35,7 +35,7 @@ const SearchBar = () => {
         </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default SearchBar;
+export default SearchBar

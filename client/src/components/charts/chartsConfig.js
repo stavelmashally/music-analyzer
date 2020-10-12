@@ -5,7 +5,7 @@ export const FEATURES = [
   'acousticness',
   'liveness',
   'valence',
-];
+]
 
 export const FEATURE_INFO = {
   acousticness:
@@ -20,22 +20,22 @@ export const FEATURE_INFO = {
     'Speechiness detects the presence of spoken words in a track. The more exclusively speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value.',
   valence:
     'A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).',
-};
+}
 
 export const formatData = artists => {
-  const data = [];
+  const data = []
 
   FEATURES.forEach(featureName => {
-    const feature = { name: featureName };
+    const feature = {name: featureName}
     artists.forEach(
       artist => (feature[artist.name] = artist.audioFeatures[featureName]),
-    );
-    data.push(feature);
-  });
+    )
+    data.push(feature)
+  })
 
-  return data;
-};
+  return data
+}
 
 export const generateColor = () => {
-  return '#' + Math.random().toString(16).substr(-6);
-};
+  return '#' + Math.random().toString(16).substr(-6)
+}
