@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import {
   ResponsiveContainer,
   BarChart,
@@ -11,7 +11,7 @@ import {
 } from 'recharts'
 import CustomizedAxisTick from './CustomizedAxisTick'
 import CustomToolTip from './CustomToolTip'
-import {formatData, generateColor} from './chartsConfig'
+import {formatData, generateColor} from '../../utils'
 
 const ArtistChart = ({data}) => {
   const renderBars = () =>
@@ -19,7 +19,7 @@ const ArtistChart = ({data}) => {
       <Bar key={id} dataKey={name} fill={generateColor()} />
     ))
 
-  const formattedData = formatData(data)
+  const formattedData = useMemo(() => formatData(data), [data])
 
   return (
     <ResponsiveContainer width="100%" height={450}>
