@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, memo} from 'react'
 import {useArtist, fetchArtists} from '../contexts/ArtistContext'
 
 const SearchBar = () => {
@@ -38,4 +38,4 @@ const SearchBar = () => {
   )
 }
 
-export default SearchBar
+export default memo(SearchBar)

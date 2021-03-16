@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState} from 'react'
+import React, {createContext, useContext, useState, useMe} from 'react'
 import {useAsyncReducer} from '../hooks/useAsyncReducer'
 import axios from 'axios'
 
@@ -9,6 +9,7 @@ const ArtistProvider = ({children}) => {
   const [selections, setSelections] = useState([])
 
   const value = {status, artists, error, dispatch, selections, setSelections}
+
   return (
     <ArtistContext.Provider value={value}>{children}</ArtistContext.Provider>
   )
