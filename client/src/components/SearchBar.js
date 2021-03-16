@@ -1,9 +1,10 @@
 import React, {useState, memo} from 'react'
-import {useArtist, fetchArtists} from '../contexts/ArtistContext'
+import {useDispatch} from 'react-redux'
+import {fetchArtists} from '../redux/artists'
 
 const SearchBar = () => {
   const [term, setTerm] = useState('')
-  const {dispatch} = useArtist()
+  const dispatch = useDispatch()
 
   const updateTerm = e => setTerm(e.target.value)
 
@@ -13,7 +14,7 @@ const SearchBar = () => {
     if (!artistName) {
       return
     }
-    fetchArtists(dispatch, artistName)
+    dispatch(fetchArtists(artistName))
     setTerm('')
   }
 

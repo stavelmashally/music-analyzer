@@ -1,12 +1,12 @@
 import React from 'react'
-import {useArtist} from '../../contexts/ArtistContext'
+import {useSelector} from 'react-redux'
 import ChartPlaceholder from './ChartPlaceholder'
 import Loader from '../Loader'
 
 const ArtistChart = React.lazy(() => import('./ArtistChart'))
 
 const ChartSection = () => {
-  const {selections} = useArtist()
+  const {selected} = useSelector(state => state.artists)
 
   return (
     <div
@@ -16,11 +16,11 @@ const ChartSection = () => {
         marginTop: '50px',
       }}
     >
-      {selections.length === 0 ? (
+      {selected.length === 0 ? (
         <ChartPlaceholder />
       ) : (
         <React.Suspense fallback={<Loader />}>
-          <ArtistChart data={selections} />
+          <ArtistChart data={selected} />
         </React.Suspense>
       )}
     </div>

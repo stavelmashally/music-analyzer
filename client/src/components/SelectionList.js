@@ -1,12 +1,13 @@
 import React from 'react'
-import {useArtist, deleteSelection} from '../contexts/ArtistContext'
+import {useDispatch, useSelector} from 'react-redux'
+import {deleteArtist} from '../redux/artists'
 import Artist from './artists/Artist'
 
 const SelectionList = () => {
-  const {selections, setSelections} = useArtist()
+  const {selected} = useSelector(state => state.artists)
+  const dispatch = useDispatch()
 
-  const handleDelete = ({id}) => deleteSelection(setSelections, id)
-
+  const handleDelete = ({id}) => dispatch(deleteArtist(id))
   const renderArtist = artist => (
     <Artist
       key={artist.id}
@@ -18,7 +19,7 @@ const SelectionList = () => {
 
   return (
     <div className="ui big horizontal selection list">
-      {selections.map(renderArtist)}
+      {selected.map(renderArtist)}
     </div>
   )
 }

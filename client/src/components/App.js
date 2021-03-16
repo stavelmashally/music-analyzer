@@ -1,6 +1,5 @@
 import React from 'react'
 import {AppProvider} from '../contexts/AppContext'
-import {ArtistProvider} from '../contexts/ArtistContext'
 
 import Header from './Header'
 import SearchBar from './SearchBar'
@@ -14,12 +13,10 @@ const App = () => (
     <AppProvider>
       <Header />
       <div className="ui container">
-        <ArtistProvider>
-          <SearchBar />
-          <ArtistList />
-          <SelectionList />
-          <ChartSection />
-        </ArtistProvider>
+        <SearchBar />
+        <ArtistList />
+        <SelectionList />
+        <ChartSection />
         <AppInfo />
       </div>
     </AppProvider>

@@ -1,32 +1,34 @@
 import React from 'react'
-import {useArtist, addSelection} from '../../contexts/ArtistContext'
+import {useDispatch, useSelector} from 'react-redux'
+import {addArtist} from '../../redux/artists'
 
 import Artist from './Artist'
 import Loader from '../Loader'
 
 const ArtistList = () => {
-  const {status, artists, error, dispatch, setSelections} = useArtist()
+  const {data, loading, error, selected} = useSelector(state => state.artists)
+  const dispatch = useDispatch()
 
   const handleSelection = artist => {
-    addSelection(setSelections, dispatch, artist)
+    dispatch(addArtist(artist))
   }
 
   const renderArtist = artist => (
     <Artist key={artist.id} artist={artist} onSelected={handleSelection} />
   )
 
-  if (status === 'pending') {
+  if (loading === 'pending') {
     return (
       <div style={{marginTop: '10px'}}>
         <Loader />
       </div>
     )
-  } else if (status === 'rejected') {
+  } else if (error) {
     return <div className="ui red mini message">{error}</div>
-  } else if (status === 'resolved') {
+  } else if (!error && data.length) {
     return (
       <div className="ui big middle aligned selection list">
-        {artists.map(renderArtist)}
+        {data.map(renderArtist)}
       </div>
     )
   } else {

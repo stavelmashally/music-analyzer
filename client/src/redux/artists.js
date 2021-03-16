@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
+import axios from 'axios'
 
 const artistsSlice = createSlice({
   name: 'artists',
@@ -22,6 +23,7 @@ const artistsSlice = createSlice({
     },
     addArtist: (state, action) => {
       state.selected.push(action.payload)
+      state.data = []
     },
     deleteArtist: (state, action) => {
       state.selected = state.selected.filter(
