@@ -7,6 +7,10 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "@types/jest": "^26.0.20",
+    "@types/node": "^14.14.35",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.2",
     "axios": "^0.20.0",
     "http-proxy-middleware": "^1.0.5",
     "react": "^16.13.1",
@@ -15,7 +19,8 @@
     "react-redux": "^7.2.2",
     "react-scripts": "3.4.3",
     "recharts": "^1.8.5",
-    "styled-components": "^5.2.0"
+    "styled-components": "^5.2.0",
+    "typescript": "^4.2.3"
   },
   "scripts": {
     "start": "react-scripts start",
