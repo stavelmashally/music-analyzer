@@ -4,18 +4,19 @@ import {fetchArtists} from '../redux/artists'
 
 const SearchBar = () => {
   const [term, setTerm] = useState('')
+  
   const dispatch = useDispatch()
 
-  const updateTerm = e => setTerm(e.target.value)
+  const updateTerm = ({target: {value}}: React.ChangeEvent<HTMLInputElement>) =>
+    setTerm(value)
 
-  const handleSubmit = async e => {
-    e.preventDefault()
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault()
     const artistName = term.trim()
-    if (!artistName) {
-      return
+    if (artistName) {
+      dispatch(fetchArtists(artistName))
+      setTerm('')
     }
-    dispatch(fetchArtists(artistName))
-    setTerm('')
   }
 
   return (

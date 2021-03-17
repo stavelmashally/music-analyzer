@@ -1,20 +1,20 @@
 import React from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import {useAppDispatch, useAppSelector} from '../../redux/hooks'
 import {addArtist} from '../../redux/artists'
-
-import Artist from './Artist'
+import {Artist} from '../../types/artist.model'
+import ArtistItem from './ArtistItem'
 import Loader from '../Loader'
 
 const ArtistList = () => {
-  const {data, loading, error, selected} = useSelector(state => state.artists)
-  const dispatch = useDispatch()
+  const {data, loading, error} = useAppSelector(state => state.artists)
+  const dispatch = useAppDispatch()
 
-  const handleSelection = artist => {
+  const handleSelection = (artist: Artist) => {
     dispatch(addArtist(artist))
   }
 
-  const renderArtist = artist => (
-    <Artist key={artist.id} artist={artist} onSelected={handleSelection} />
+  const renderArtist = (artist: Artist) => (
+    <ArtistItem key={artist.id} artist={artist} onSelected={handleSelection} />
   )
 
   if (loading === 'pending') {
