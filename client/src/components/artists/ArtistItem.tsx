@@ -1,7 +1,14 @@
 import React from 'react'
+import {Artist} from '../../types/artist.model'
 import avatar from '../../images/avatar-placeholder.png'
 
-const Artist = ({artist, onSelected, showDelete}) => {
+interface ArtistItemProps {
+  artist: Artist
+  showDelete?: boolean
+  onSelected: (artist: Artist) => void
+}
+
+const ArtistItem = ({artist, onSelected, showDelete}: ArtistItemProps) => {
   return (
     <div className="item" onClick={() => onSelected(artist)}>
       <img
@@ -18,4 +25,4 @@ const Artist = ({artist, onSelected, showDelete}) => {
   )
 }
 
-export default Artist
+export default ArtistItem

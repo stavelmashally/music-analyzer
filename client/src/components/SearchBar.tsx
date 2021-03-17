@@ -1,20 +1,22 @@
-import React, {useState} from 'react'
-import {useArtist, fetchArtists} from '../contexts/ArtistContext'
+import React, {useState, memo} from 'react'
+import {useDispatch} from 'react-redux'
+import {fetchArtists} from '../redux/artists'
 
 const SearchBar = () => {
   const [term, setTerm] = useState('')
-  const {dispatch} = useArtist()
+  
+  const dispatch = useDispatch()
 
-  const updateTerm = e => setTerm(e.target.value)
+  const updateTerm = ({target: {value}}: React.ChangeEvent<HTMLInputElement>) =>
+    setTerm(value)
 
-  const handleSubmit = async e => {
-    e.preventDefault()
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault()
     const artistName = term.trim()
-    if (!artistName) {
-      return
+    if (artistName) {
+      dispatch(fetchArtists(artistName))
+      setTerm('')
     }
-    fetchArtists(dispatch, artistName)
-    setTerm('')
   }
 
   return (
@@ -38,4 +40,4 @@ const SearchBar = () => {
   )
 }
 
-export default SearchBar
+export default memo(SearchBar)

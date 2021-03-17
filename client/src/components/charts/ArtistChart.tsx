@@ -11,9 +11,14 @@ import {
 } from 'recharts'
 import CustomizedAxisTick from './CustomizedAxisTick'
 import CustomToolTip from './CustomToolTip'
-import {formatData, generateColor} from '../../utils'
+import {formatData, generateColor} from './chartsConfig'
+import {Artist} from '../../types/artist.model'
 
-const ArtistChart = ({data}) => {
+interface ArtistChartProps {
+  data: Artist[]
+}
+
+const ArtistChart = ({data}: ArtistChartProps) => {
   const renderBars = () =>
     data.map(({id, name}) => (
       <Bar key={id} dataKey={name} fill={generateColor()} />
@@ -23,7 +28,7 @@ const ArtistChart = ({data}) => {
 
   return (
     <ResponsiveContainer width="100%" height={450}>
-      <BarChart width="100%" height={400} data={formattedData}>
+      <BarChart width={100} height={400} data={formattedData}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" interval={0} tick={<CustomizedAxisTick />} />
         <YAxis width={30} />

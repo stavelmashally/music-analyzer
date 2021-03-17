@@ -1,4 +1,15 @@
-export const FEATURES = [
+import {Artist, AudioFeatures} from '../../types/artist.model'
+
+export interface FeatureInfo {
+  acousticness: string
+  danceability: string
+  energy: string
+  liveness: string
+  speechiness: string
+  valence: string
+}
+
+export const FEATURES: string[] = [
   'danceability',
   'energy',
   'speechiness',
@@ -7,7 +18,7 @@ export const FEATURES = [
   'valence',
 ]
 
-export const FEATURE_INFO = {
+export const FEATURE_INFO: FeatureInfo = {
   acousticness:
     'A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic.',
   danceability:
@@ -20,4 +31,28 @@ export const FEATURE_INFO = {
     'Speechiness detects the presence of spoken words in a track. The more exclusively speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value.',
   valence:
     'A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).',
+}
+
+interface Feature {
+  [key: string]: number | string
+}
+
+export const formatData = (artists: Artist[]) => {
+  const data: Feature[] = []
+
+  FEATURES.forEach(featureName => {
+    const feature: Feature = {name: featureName}
+    artists.forEach(
+      artist =>
+        (feature[artist.name] =
+          artist.audioFeatures[featureName as keyof AudioFeatures]),
+    )
+    data.push(feature)
+  })
+
+  return data
+}
+
+export const generateColor = () => {
+  return '#' + Math.random().toString(16).substr(-6)
 }
