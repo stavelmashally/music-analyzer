@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CustomizedAxisTick = props => {
+const CustomizedAxisTick: React.JSXElementConstructor<any> = props => {
   const {x, y, payload} = props
 
   return (

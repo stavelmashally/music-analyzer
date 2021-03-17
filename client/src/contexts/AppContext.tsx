@@ -2,16 +2,24 @@ import React, {createContext, useContext} from 'react'
 import {ThemeProvider} from 'styled-components'
 import {lightTheme, darkTheme} from '../theme'
 import {GlobalStyles} from '../global'
-import useDarkMode from '../hooks/useDarkMode'
+import useDarkMode, {Theme} from '../hooks/useDarkMode'
 
-const AppContext = createContext()
+interface AppContextType {
+  theme: string
+  toggleTheme: () => void
+}
 
-const AppProvider = ({children}) => {
+const AppContext = createContext<AppContextType>({
+  theme: Theme.LIGHT,
+  toggleTheme: () => console.warn('no theme provider'),
+})
+
+const AppProvider: React.FC = ({children}) => {
   const [theme, toggleTheme] = useDarkMode()
 
   return (
     <AppContext.Provider value={{theme, toggleTheme}}>
-      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <ThemeProvider theme={theme === Theme.LIGHT ? lightTheme : darkTheme}>
         <GlobalStyles />
         {children}
       </ThemeProvider>

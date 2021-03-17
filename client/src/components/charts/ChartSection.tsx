@@ -1,12 +1,12 @@
 import React from 'react'
-import {useSelector} from 'react-redux'
+import {useAppSelector} from '../../redux/hooks'
 import ChartPlaceholder from './ChartPlaceholder'
 import Loader from '../Loader'
 
 const ArtistChart = React.lazy(() => import('./ArtistChart'))
 
 const ChartSection = () => {
-  const {selected} = useSelector(state => state.artists)
+  const {selected} = useAppSelector(state => state.artists)
 
   return (
     <div
