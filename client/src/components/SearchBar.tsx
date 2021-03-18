@@ -1,42 +1,31 @@
-import React, {useState, memo} from 'react'
-import {useDispatch} from 'react-redux'
-import {fetchArtists} from '../redux/artists'
+import React, {memo, useEffect} from 'react'
+import {useAppDispatch, useAppSelector} from '../redux/hooks'
+import {fetchArtists, updateSearchTerm} from '../redux/artists'
+import useDebounce from '../hooks/useDebounce'
 
 const SearchBar = () => {
-  const [term, setTerm] = useState('')
-  
-  const dispatch = useDispatch()
+  const {searchTerm} = useAppSelector(state => state.artists)
+  const debouncedSearchTerm = useDebounce(searchTerm, 800)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    if (debouncedSearchTerm) {
+      dispatch(fetchArtists(debouncedSearchTerm))
+    }
+  }, [debouncedSearchTerm, dispatch])
 
   const updateTerm = ({target: {value}}: React.ChangeEvent<HTMLInputElement>) =>
-    setTerm(value)
-
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault()
-    const artistName = term.trim()
-    if (artistName) {
-      dispatch(fetchArtists(artistName))
-      setTerm('')
-    }
-  }
+    dispatch(updateSearchTerm(value))
 
   return (
-    <div>
-      <form
-        className="ui big fluid input"
-        style={{marginTop: '30px'}}
-        onSubmit={handleSubmit}
-      >
-        <input
-          type="text"
-          placeholder="Artist name"
-          value={term}
-          onChange={updateTerm}
-        />
-        <button className="ui violet big button" type="submit">
-          Search
-        </button>
-      </form>
-    </div>
+    <form className="ui big fluid input" style={{marginTop: '30px'}}>
+      <input
+        type="text"
+        placeholder="Enter artist name"
+        value={searchTerm}
+        onChange={updateTerm}
+      />
+    </form>
   )
 }
 

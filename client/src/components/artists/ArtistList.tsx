@@ -6,7 +6,7 @@ import ArtistItem from './ArtistItem'
 import Loader from '../Loader'
 
 const ArtistList = () => {
-  const {data, loading, error} = useAppSelector(state => state.artists)
+  const {data, status, error} = useAppSelector(state => state.artists)
   const dispatch = useAppDispatch()
 
   const handleSelection = (artist: Artist) => {
@@ -17,23 +17,27 @@ const ArtistList = () => {
     <ArtistItem key={artist.id} artist={artist} onSelected={handleSelection} />
   )
 
-  if (loading === 'pending') {
+  if (status === 'loading') {
     return (
       <div style={{marginTop: '10px'}}>
         <Loader />
       </div>
     )
-  } else if (error) {
+  }
+
+  if (error) {
     return <div className="ui red mini message">{error}</div>
-  } else if (!error && data.length) {
+  }
+
+  if (data.length) {
     return (
       <div className="ui big middle aligned selection list">
         {data.map(renderArtist)}
       </div>
     )
-  } else {
-    return null
   }
+  
+  return null
 }
 
 export default ArtistList

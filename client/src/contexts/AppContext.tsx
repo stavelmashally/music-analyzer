@@ -5,8 +5,12 @@ import {GlobalStyles} from '../global'
 import useDarkMode, {Theme} from '../hooks/useDarkMode'
 
 interface AppContextType {
-  theme: string
+  theme: Theme
   toggleTheme: () => void
+}
+
+interface AppProviderProps {
+  children: React.ReactNode
 }
 
 const AppContext = createContext<AppContextType>({
@@ -14,7 +18,7 @@ const AppContext = createContext<AppContextType>({
   toggleTheme: () => console.warn('no theme provider'),
 })
 
-const AppProvider: React.FC = ({children}) => {
+const AppProvider = ({children}: AppProviderProps) => {
   const [theme, toggleTheme] = useDarkMode()
 
   return (

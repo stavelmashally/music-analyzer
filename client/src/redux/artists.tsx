@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {AppDispatch} from './store'
+import {AppDispatch, RootState} from './store'
 import axios from 'axios'
 import {Artist} from '../types/artist.model'
 
@@ -8,16 +8,18 @@ interface ArtistsError {
 }
 
 interface ArtistsState {
+  searchTerm: string
   data: Artist[]
   selected: Artist[]
-  loading: 'idle' | 'pending'
+  status: 'idle' | 'loading'
   error: ArtistsError | null
 }
 
 const initialState: ArtistsState = {
+  searchTerm: '',
   data: [],
   selected: [],
-  loading: 'idle',
+  status: 'idle',
   error: null,
 }
 
@@ -25,19 +27,27 @@ const artistsSlice = createSlice({
   name: 'artists',
   initialState,
   reducers: {
+    updateSearchTerm: (state, {payload}: PayloadAction<string>) => {
+      state.searchTerm = payload
+      if (payload === '') {
+        state.error = null
+        state.data = []
+      }
+    },
     artistsReceived: (state, {payload}: PayloadAction<Artist[]>) => {
-      state.loading = 'idle'
+      state.status = 'idle'
       state.data = payload
     },
     artistsLoading: state => {
-      state.loading = 'pending'
+      state.status = 'loading'
     },
     artistsError: (state, {payload}: PayloadAction<ArtistsError>) => {
-      state.loading = 'idle'
+      state.status = 'idle'
       state.error = payload
     },
     addArtist: (state, {payload}: PayloadAction<Artist>) => {
       state.selected.push(payload)
+      state.searchTerm = ''
       state.data = []
     },
     deleteArtist: (state, {payload}: PayloadAction<string>) => {
@@ -47,6 +57,7 @@ const artistsSlice = createSlice({
 })
 
 export const {
+  updateSearchTerm,
   artistsReceived,
   artistsLoading,
   artistsError,

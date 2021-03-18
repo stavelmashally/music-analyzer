@@ -2,11 +2,11 @@ import React, {useState, useEffect} from 'react'
 
 export enum Theme {
   LIGHT = 'light',
-  DARK = 'dark'
+  DARK = 'dark',
 }
 
-const useDarkMode = (): [string, () => void] => {
-  const [theme, setTheme] = useState<Theme>(Theme.LIGHT)
+const useDarkMode = (): [Theme, () => void] => {
+  const [theme, setTheme] = useState(Theme.LIGHT)
 
   const toggleTheme = () => {
     if (theme === Theme.LIGHT) {
@@ -20,8 +20,7 @@ const useDarkMode = (): [string, () => void] => {
 
   useEffect(() => {
     const localTheme = localStorage.getItem('theme')
-    localTheme &&
-      setTheme(localTheme === Theme.LIGHT ? Theme.LIGHT : Theme.DARK)
+    localTheme && setTheme(localTheme as Theme)
   }, [])
 
   return [theme, toggleTheme]
