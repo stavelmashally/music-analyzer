@@ -3,19 +3,19 @@ import {AppDispatch} from './store'
 import axios from 'axios'
 import {Artist} from 'types/artist.model'
 
-interface ArtistsError {
+type AppError = {
   error: string
-}
+} | null
 
-export interface ArtistsState {
+export interface AppState {
   searchTerm: string
   data: Artist[]
   selected: Artist[]
   status: 'idle' | 'loading'
-  error: ArtistsError | null
+  error: AppError
 }
 
-const initialState: ArtistsState = {
+const initialState: AppState = {
   searchTerm: '',
   data: [],
   selected: [],
@@ -23,8 +23,8 @@ const initialState: ArtistsState = {
   error: null,
 }
 
-const artistsSlice = createSlice({
-  name: 'artists',
+const AppSlice = createSlice({
+  name: 'App',
   initialState,
   reducers: {
     updateSearchTerm: (state, {payload}: PayloadAction<string>) => {
@@ -41,7 +41,7 @@ const artistsSlice = createSlice({
     artistsLoading: state => {
       state.status = 'loading'
     },
-    artistsError: (state, {payload}: PayloadAction<ArtistsError>) => {
+    artistsError: (state, {payload}: PayloadAction<AppError>) => {
       state.status = 'idle'
       state.error = payload
     },
@@ -63,8 +63,8 @@ export const {
   artistsError,
   addArtist,
   deleteArtist,
-} = artistsSlice.actions
-export default artistsSlice.reducer
+} = AppSlice.actions
+export default AppSlice.reducer
 
 export const fetchArtists = (name: string) => async (dispatch: AppDispatch) => {
   try {
