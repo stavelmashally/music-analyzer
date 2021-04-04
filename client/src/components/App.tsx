@@ -1,6 +1,4 @@
-import React from 'react'
-import {AppProvider} from '../contexts/AppContext'
-
+import {AppProvider} from 'contexts/AppContext'
 import Header from './Header'
 import SearchBar from './SearchBar'
 import ArtistList from './artists/ArtistList'

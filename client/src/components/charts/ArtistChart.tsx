@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react'
+import {useMemo} from 'react'
 import {
   ResponsiveContainer,
   BarChart,
@@ -12,7 +12,7 @@ import {
 import CustomizedAxisTick from './CustomizedAxisTick'
 import CustomToolTip from './CustomToolTip'
 import {formatData, generateColor} from './chartsConfig'
-import {Artist} from '../../types/artist.model'
+import {Artist} from 'types/artist.model'
 
 interface ArtistChartProps {
   data: Artist[]

@@ -1,5 +1,4 @@
-import React from 'react'
-import {useApp} from '../../contexts/AppContext'
+import {useApp} from 'contexts/AppContext'
 
 const ChartPlaceholder = () => {
   const {theme} = useApp()

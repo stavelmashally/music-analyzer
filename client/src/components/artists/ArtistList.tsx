@@ -1,9 +1,8 @@
-import React from 'react'
-import {useAppDispatch, useAppSelector} from '../../redux/hooks'
-import {addArtist} from '../../redux/artists'
-import {Artist} from '../../types/artist.model'
+import {useAppDispatch, useAppSelector} from 'redux/hooks'
+import {addArtist} from 'redux/artists'
+import {Artist} from 'types/artist.model'
 import ArtistItem from './ArtistItem'
-import Loader from '../Loader'
+import Loader from 'components/Loader'
 
 const ArtistList = () => {
   const {data, status, error} = useAppSelector(state => state.artists)

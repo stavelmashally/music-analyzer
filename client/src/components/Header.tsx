@@ -1,7 +1,6 @@
-import React from 'react'
-import {useApp} from '../contexts/AppContext'
+import {useApp} from 'contexts/AppContext'
 import DarkModeToggle from 'react-dark-mode-toggle'
-import logo from '../images/audio-logo.png'
+import logo from 'images/audio-logo.png'
 
 const Header = () => {
   const {theme, toggleTheme} = useApp()

@@ -1,6 +1,5 @@
-import React from 'react'
-import {Artist} from '../../types/artist.model'
-import avatar from '../../images/avatar-placeholder.png'
+import {Artist} from 'types/artist.model'
+import avatar from 'images/avatar-placeholder.png'
 
 interface ArtistItemProps {
   artist: Artist

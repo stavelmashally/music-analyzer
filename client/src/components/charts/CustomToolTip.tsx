@@ -1,4 +1,3 @@
-import React from 'react'
 import {TooltipPayload, TooltipProps} from 'recharts'
 import {withTheme, DefaultTheme} from 'styled-components'
 import {FEATURE_INFO, FeatureInfo} from './chartsConfig'

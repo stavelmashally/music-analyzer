@@ -1,13 +1,13 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {AppDispatch, RootState} from './store'
+import {AppDispatch} from './store'
 import axios from 'axios'
-import {Artist} from '../types/artist.model'
+import {Artist} from 'types/artist.model'
 
 interface ArtistsError {
   error: string
 }
 
-interface ArtistsState {
+export interface ArtistsState {
   searchTerm: string
   data: Artist[]
   selected: Artist[]

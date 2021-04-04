@@ -1,7 +1,6 @@
-import React from 'react'
-import {useAppDispatch, useAppSelector} from '../redux/hooks'
-import {deleteArtist} from '../redux/artists'
-import {Artist} from '../types/artist.model'
+import {useAppDispatch, useAppSelector} from 'redux/hooks'
+import {deleteArtist} from 'redux/artists'
+import {Artist} from 'types/artist.model'
 import ArtistItem from './artists/ArtistItem'
 
 const SelectionList = () => {

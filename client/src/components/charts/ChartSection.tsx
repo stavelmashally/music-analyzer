@@ -1,13 +1,13 @@
 import React from 'react'
-import {useAppSelector} from '../../redux/hooks'
+import {useAppSelector} from 'redux/hooks'
 import ChartPlaceholder from './ChartPlaceholder'
-import Loader from '../Loader'
+import Loader from 'components/Loader'
 
 const ArtistChart = React.lazy(() => import('./ArtistChart'))
 
 const ChartSection = () => {
   const {selected} = useAppSelector(state => state.artists)
-
+  console.log('chart section')
   return (
     <div
       style={{
@@ -27,4 +27,4 @@ const ChartSection = () => {
   )
 }
 
-export default ChartSection
+export default React.memo(ChartSection)
