@@ -1,16 +1,15 @@
 import {TooltipPayload, TooltipProps} from 'recharts'
 import {withTheme, DefaultTheme} from 'styled-components'
 import {FEATURE_INFO, FeatureInfo} from './chartsConfig'
-
 interface CustomToolTipProps extends TooltipProps {
   theme: DefaultTheme
 }
 
 const CustomToolTip = ({active, label, payload, theme}: CustomToolTipProps) => {
-  const renderContent = () =>
-    payload?.map(({dataKey, value, color}: TooltipPayload) => (
-      <h5 key={color} style={{color}}>{`${dataKey} : ${value}`}</h5>
-    ))
+  const titles = payload?.map(({dataKey, value, color}: TooltipPayload) => (
+    <h5 key={color} style={{color}}>{`${dataKey} : ${value}`}</h5>
+  ))
+  const featureInfo = FEATURE_INFO[label as keyof FeatureInfo]
 
   if (active) {
     return (
@@ -18,9 +17,9 @@ const CustomToolTip = ({active, label, payload, theme}: CustomToolTipProps) => {
         className="ui segment"
         style={{width: '300px', backgroundColor: theme.body}}
       >
-        {renderContent()}
+        {titles}
         <h4>{label}</h4>
-        <p className="desc">{FEATURE_INFO[label as keyof FeatureInfo]}</p>
+        <p className="desc">{featureInfo}</p>
       </div>
     )
   }

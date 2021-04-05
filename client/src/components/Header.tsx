@@ -4,7 +4,6 @@ import logo from 'images/audio-logo.png'
 
 const Header = () => {
   const {theme, toggleTheme} = useApp()
-
   const isDarkMode = theme === 'dark'
 
   return (

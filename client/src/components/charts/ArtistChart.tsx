@@ -19,11 +19,9 @@ interface ArtistChartProps {
 }
 
 const ArtistChart = ({data}: ArtistChartProps) => {
-  const renderBars = () =>
-    data.map(({id, name}) => (
-      <Bar key={id} dataKey={name} fill={generateColor()} />
-    ))
-
+  const chartBars = data.map(({id, name}) => (
+    <Bar key={id} dataKey={name} fill={generateColor()} />
+  ))
   const formattedData = useMemo(() => formatData(data), [data])
 
   return (
@@ -34,7 +32,7 @@ const ArtistChart = ({data}: ArtistChartProps) => {
         <YAxis width={30} />
         <Tooltip content={<CustomToolTip />} />
         <Legend wrapperStyle={{paddingTop: '30px'}} />
-        {renderBars()}
+        {chartBars}
       </BarChart>
     </ResponsiveContainer>
   )

@@ -1,4 +1,4 @@
-import {useAppDispatch, useAppSelector} from 'redux/hooks'
+import {useAppDispatch, useAppSelector} from 'hooks/useAppState'
 import {addArtist} from 'redux/app'
 import {Artist} from 'types/artist.model'
 import ArtistItem from './ArtistItem'
@@ -12,31 +12,28 @@ const ArtistList = () => {
     dispatch(addArtist(artist))
   }
 
-  const renderArtist = (artist: Artist) => (
+  const artistListItems = data.map(artist => (
     <ArtistItem key={artist.id} artist={artist} onSelected={handleSelection} />
-  )
+  ))
 
+  let content = null
   if (status === 'loading') {
-    return (
+    content = (
       <div style={{marginTop: '10px'}}>
         <Loader />
       </div>
     )
-  }
-
-  if (error) {
-    return <div className="ui red mini message">{error}</div>
-  }
-
-  if (data.length) {
-    return (
+  } else if (error) {
+    content = <div className="ui red mini message">{error}</div>
+  } else if (data.length) {
+    content = (
       <div className="ui big middle aligned selection list">
-        {data.map(renderArtist)}
+        {artistListItems}
       </div>
     )
   }
-  
-  return null
+
+  return content
 }
 
 export default ArtistList

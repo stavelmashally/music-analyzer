@@ -1,8 +1,10 @@
 import React from 'react'
 
-const CustomizedAxisTick: React.JSXElementConstructor<any> = props => {
-  const {x, y, payload} = props
-
+const CustomizedAxisTick: React.JSXElementConstructor<any> = ({
+  x,
+  y,
+  payload: {value},
+}) => {
   return (
     <g transform={`translate(${x},${y})`}>
       <text
@@ -14,7 +16,7 @@ const CustomizedAxisTick: React.JSXElementConstructor<any> = props => {
         fontSize="12px"
         transform="rotate(-20)"
       >
-        {payload.value}
+        {value}
       </text>
     </g>
   )

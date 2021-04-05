@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {useAppDispatch, useAppSelector} from 'redux/hooks'
+import {useAppDispatch, useAppSelector} from 'hooks/useAppState'
 import {fetchArtists, updateSearchTerm} from 'redux/app'
 import useDebounce from 'hooks/useDebounce'
 
