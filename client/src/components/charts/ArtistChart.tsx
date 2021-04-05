@@ -11,18 +11,16 @@ import {
 } from 'recharts'
 import CustomizedAxisTick from './CustomizedAxisTick'
 import CustomToolTip from './CustomToolTip'
-import {formatData, generateColor} from './chartsConfig'
-import {Artist} from 'types/artist.model'
+import {formatData} from 'utils/arrayUtils'
+import {useArtistSelector} from 'hooks/useArtistSelector'
 
-interface ArtistChartProps {
-  data: Artist[]
-}
+const ArtistChart = () => {
+  const {selected} = useArtistSelector()
 
-const ArtistChart = ({data}: ArtistChartProps) => {
-  const chartBars = data.map(({id, name}) => (
-    <Bar key={id} dataKey={name} fill={generateColor()} />
+  const chartBars = selected.map(({id, name, color}) => (
+    <Bar key={id} dataKey={name} fill={color} />
   ))
-  const formattedData = useMemo(() => formatData(data), [data])
+  const formattedData = useMemo(() => formatData(selected), [selected])
 
   return (
     <ResponsiveContainer width="100%" height={450}>

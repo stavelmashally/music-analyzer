@@ -23,4 +23,5 @@ export interface Artist {
   name: string
   image: ArtistImage
   audioFeatures: AudioFeatures
+  color?: string
 }

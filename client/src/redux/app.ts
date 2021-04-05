@@ -10,7 +10,6 @@ type AppError = {
 export interface AppState {
   searchTerm: string
   data: Artist[]
-  selected: Artist[]
   status: 'idle' | 'loading'
   error: AppError
 }
@@ -18,7 +17,6 @@ export interface AppState {
 const initialState: AppState = {
   searchTerm: '',
   data: [],
-  selected: [],
   status: 'idle',
   error: null,
 }
@@ -45,13 +43,9 @@ const AppSlice = createSlice({
       state.status = 'idle'
       state.error = payload
     },
-    addArtist: (state, {payload}: PayloadAction<Artist>) => {
-      state.selected.push(payload)
-      state.searchTerm = ''
+    clearResults: state => {
       state.data = []
-    },
-    deleteArtist: (state, {payload}: PayloadAction<string>) => {
-      state.selected = state.selected.filter(artist => artist.id !== payload)
+      state.searchTerm = ''
     },
   },
 })
@@ -61,8 +55,7 @@ export const {
   artistsReceived,
   artistsLoading,
   artistsError,
-  addArtist,
-  deleteArtist,
+  clearResults,
 } = AppSlice.actions
 export default AppSlice.reducer
 

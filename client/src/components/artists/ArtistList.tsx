@@ -1,6 +1,7 @@
-import { useAppSelector } from 'hooks/useAppSelector'
+import {useAppSelector} from 'hooks/useAppSelector'
 import {useAppDispatch} from 'hooks/useAppDispatch'
-import {addArtist} from 'redux/app'
+import {addArtist} from 'redux/artists'
+import {clearResults} from 'redux/app'
 import {Artist} from 'types/artist.model'
 import ArtistItem from './ArtistItem'
 import Loader from 'components/Loader'
@@ -10,6 +11,7 @@ const ArtistList = () => {
   const dispatch = useAppDispatch()
 
   const handleSelection = (artist: Artist) => {
+    dispatch(clearResults())
     dispatch(addArtist(artist))
   }
 
