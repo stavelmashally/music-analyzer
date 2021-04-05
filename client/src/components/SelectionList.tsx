@@ -1,11 +1,10 @@
-import { useArtistSelector } from 'hooks/useArtistSelector'
-import {useAppDispatch} from 'hooks/useAppDispatch'
+import {useArtistsSelector, useAppDispatch} from 'hooks/reduxHooks'
 import {deleteArtist} from 'redux/artists'
 import {Artist} from 'types/artist.model'
 import ArtistItem from './artists/ArtistItem'
 
 const SelectionList = () => {
-  const {selected} = useArtistSelector()
+  const {selected} = useArtistsSelector()
   const dispatch = useAppDispatch()
 
   const handleDelete = ({id}: Artist) => dispatch(deleteArtist(id))

@@ -1,5 +1,4 @@
-import {useAppSelector} from 'hooks/useAppSelector'
-import {useAppDispatch} from 'hooks/useAppDispatch'
+import {useAppSelector, useAppDispatch} from 'hooks/reduxHooks'
 import {addArtist} from 'redux/artists'
 import {clearResults} from 'redux/app'
 import {Artist} from 'types/artist.model'

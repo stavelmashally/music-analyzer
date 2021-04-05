@@ -1,11 +1,11 @@
 import {configureStore} from '@reduxjs/toolkit'
 import appReducer from './app'
-import artistReducer from './artists'
+import artistsReducer from './artists'
 
 const store = configureStore({
   reducer: {
     app: appReducer,
-    artist: artistReducer,
+    artists: artistsReducer,
   },
 })
 

@@ -1,11 +1,11 @@
 import React from 'react'
-import {useArtistSelector} from 'hooks/useArtistSelector'
+import {useArtistsSelector} from 'hooks/reduxHooks'
 import ChartPlaceholder from './ChartPlaceholder'
 import Loader from 'components/Loader'
 const ArtistChart = React.lazy(() => import('./ArtistChart'))
 
 const ChartSection = () => {
-  const {selected} = useArtistSelector()
+  const {selected} = useArtistsSelector()
   const content =
     selected.length > 0 ? (
       <React.Suspense fallback={<Loader />}>

@@ -2,15 +2,15 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {Artist} from 'types/artist.model'
 import {generateColor} from 'utils/colorUtills'
 
-export interface ArtistState {
+export interface ArtistsState {
   selected: Artist[]
 }
 
-const initialState: ArtistState = {
+const initialState: ArtistsState = {
   selected: [],
 }
 
-const artistSlice = createSlice({
+const artistsSlice = createSlice({
   name: 'artists',
   initialState,
   reducers: {
@@ -23,5 +23,5 @@ const artistSlice = createSlice({
   },
 })
 
-export const {addArtist, deleteArtist} = artistSlice.actions
-export default artistSlice.reducer
+export const {addArtist, deleteArtist} = artistsSlice.actions
+export default artistsSlice.reducer
