@@ -1,12 +1,13 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useAppSelector } from 'redux/hooks'
 import {appSelector} from 'redux/app'
 import ChartPlaceholder from './ChartPlaceholder'
 import Loader from 'components/Loader'
 const ArtistChart = React.lazy(() => import('./ArtistChart'))
 
 const ChartSection = () => {
-  const {selected} = useSelector(appSelector)
+  const { selected } = useAppSelector(appSelector)
+  
   const content =
     selected.length > 0 ? (
       <React.Suspense fallback={<Loader />}>

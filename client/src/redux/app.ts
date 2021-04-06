@@ -52,13 +52,11 @@ const AppSlice = createSlice({
     },
     addArtist: (state, {payload}: PayloadAction<Artist>) => {
       state.selected.push({...payload, color: generateColor()})
+      state.data = []
+      state.searchTerm = ''
     },
     deleteArtist: (state, {payload}: PayloadAction<string>) => {
       state.selected = state.selected.filter(artist => artist.id !== payload)
-    },
-    clearResults: state => {
-      state.data = []
-      state.searchTerm = ''
     },
   },
   extraReducers: builder => {
@@ -77,12 +75,8 @@ const AppSlice = createSlice({
   },
 })
 
-export const {
-  updateSearchTerm,
-  addArtist,
-  deleteArtist,
-  clearResults,
-} = AppSlice.actions
+export const {updateSearchTerm, addArtist, deleteArtist} = AppSlice.actions
 export default AppSlice.reducer
 
 export const appSelector = (state: RootState) => state.app
+export const selectedArtistsSelector = (state: RootState) => state.app.selected

@@ -12,11 +12,11 @@ import {
 import CustomizedAxisTick from './CustomizedAxisTick'
 import CustomToolTip from './CustomToolTip'
 import { formatData } from 'utils/arrayUtils'
-import {appSelector} from 'redux/app'
-import {useSelector} from 'react-redux'
+import {selectedArtistsSelector} from 'redux/app'
+import {useAppSelector} from 'redux/hooks'
 
 const ArtistChart = () => {
-  const {selected} = useSelector(appSelector)
+  const selected = useAppSelector(selectedArtistsSelector)
 
   const chartBars = selected.map(({id, name, color}) => (
     <Bar key={id} dataKey={name} fill={color} />

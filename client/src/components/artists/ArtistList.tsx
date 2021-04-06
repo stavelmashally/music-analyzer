@@ -1,16 +1,15 @@
-import {useSelector, useDispatch} from 'react-redux'
+import {ReactNode} from 'react'
+import {useAppSelector, useAppDispatch} from 'redux/hooks'
 import {addArtist, appSelector} from 'redux/app'
-import {clearResults} from 'redux/app'
 import {Artist} from 'types/artist.model'
 import ArtistItem from './ArtistItem'
 import Loader from 'components/Loader'
 
 const ArtistList = () => {
-  const {data, status, error} = useSelector(appSelector)
-  const dispatch = useDispatch()
+  const {data, status, error} = useAppSelector(appSelector)
+  const dispatch = useAppDispatch()
 
   const handleSelection = (artist: Artist) => {
-    dispatch(clearResults())
     dispatch(addArtist(artist))
   }
 
@@ -18,7 +17,7 @@ const ArtistList = () => {
     <ArtistItem key={artist.id} artist={artist} onSelected={handleSelection} />
   ))
 
-  let content = null
+  let content
   if (status === 'loading') {
     content = (
       <div style={{marginTop: '10px'}}>
@@ -33,8 +32,9 @@ const ArtistList = () => {
         {artistListItems}
       </div>
     )
+  } else {
+    content = null
   }
-
   return content
 }
 

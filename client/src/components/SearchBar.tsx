@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react'
-import {useSelector, useDispatch} from 'react-redux'
+import {useAppSelector, useAppDispatch} from 'redux/hooks'
 import {fetchArtists, updateSearchTerm, appSelector} from 'redux/app'
 import useDebounce from 'hooks/useDebounce'
 
 const SearchBar = () => {
-  const {searchTerm} = useSelector(appSelector)
-  const dispatch = useDispatch()
+  const {searchTerm} = useAppSelector(appSelector)
+  const dispatch = useAppDispatch()
   const debouncedSearchTerm = useDebounce(searchTerm, 500)
 
   const updateTerm = ({target: {value}}: React.ChangeEvent<HTMLInputElement>) =>
