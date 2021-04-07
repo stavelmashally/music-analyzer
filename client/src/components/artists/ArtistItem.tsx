@@ -1,4 +1,5 @@
-import {Artist} from 'types/artist.model'
+import { Artist } from 'types/artist.model'
+import { ListItem, ItemContent} from 'styles'
 import avatar from 'images/avatar-placeholder.png'
 interface ArtistItemProps {
   artist: Artist
@@ -11,14 +12,12 @@ const ArtistItem = ({artist, onSelected, showDelete}: ArtistItemProps) => {
   const image = artist.image ? artist.image.url : avatar
 
   return (
-    <div className="item" onClick={() => onSelected(artist)}>
+    <ListItem onClick={() => onSelected(artist)}>
       <img src={image} className="ui avatar image" alt="artist avatar" />
-      <div className="content">
-        <div className="header">
-          <h4>{title}</h4>
-        </div>
-      </div>
-    </div>
+      <ItemContent>
+        <h4>{title}</h4>
+      </ItemContent>
+    </ListItem>
   )
 }
 

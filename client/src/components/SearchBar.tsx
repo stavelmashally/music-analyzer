@@ -2,14 +2,25 @@ import React, {useEffect} from 'react'
 import {useAppSelector, useAppDispatch} from 'redux/hooks'
 import {fetchArtists, updateSearchTerm, appSelector} from 'redux/app'
 import useDebounce from 'hooks/useDebounce'
+import ArtistItem from 'components/artists/ArtistItem'
+import {Input, SearchBox, ListItem} from 'styles'
 
 const SearchBar = () => {
-  const {searchTerm} = useAppSelector(appSelector)
+  const {searchTerm, data} = useAppSelector(appSelector)
   const dispatch = useAppDispatch()
   const debouncedSearchTerm = useDebounce(searchTerm, 500)
 
-  const updateTerm = ({target: {value}}: React.ChangeEvent<HTMLInputElement>) =>
-    dispatch(updateSearchTerm(value))
+  const artistListItems = data.map(artist => (
+    <ArtistItem
+      key={artist.id}
+      artist={artist}
+      onSelected={() => console.log('selected')}
+    />
+  ))
+
+  const handleChange = ({
+    target: {value},
+  }: React.ChangeEvent<HTMLInputElement>) => dispatch(updateSearchTerm(value))
 
   useEffect(() => {
     if (debouncedSearchTerm) {
@@ -18,14 +29,14 @@ const SearchBar = () => {
   }, [debouncedSearchTerm, dispatch])
 
   return (
-    <form className="ui big fluid input" style={{marginTop: '30px'}}>
-      <input
-        type="text"
+    <div>
+      <Input
         placeholder="Enter artist name"
         value={searchTerm}
-        onChange={updateTerm}
+        onChange={handleChange}
       />
-    </form>
+      <SearchBox>{artistListItems}</SearchBox>
+    </div>
   )
 }
 

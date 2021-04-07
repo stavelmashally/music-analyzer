@@ -12,7 +12,7 @@ const App = () => (
       <Header />
       <div className="ui container">
         <SearchBar />
-        <ArtistList />
+        {/* <ArtistList /> */}
         <SelectionList />
         <ChartSection />
         <AppInfo />
