@@ -1,4 +1,4 @@
-import {useMemo} from 'react'
+import {useMemo, memo} from 'react'
 import {
   ResponsiveContainer,
   BarChart,
@@ -11,17 +11,18 @@ import {
 } from 'recharts'
 import CustomizedAxisTick from './CustomizedAxisTick'
 import CustomToolTip from './CustomToolTip'
-import { formatData } from 'utils/arrayUtils'
-import {selectedArtistsSelector} from 'redux/app'
-import {useAppSelector} from 'redux/hooks'
+import {formatData} from 'utils/arrayUtils'
+import {Artist} from 'types/artist.model'
 
-const ArtistChart = () => {
-  const selected = useAppSelector(selectedArtistsSelector)
+interface ArtistsChartProps {
+  artists: Artist[]
+}
 
-  const chartBars = selected.map(({id, name, color}) => (
+const ArtistsChart = ({artists}: ArtistsChartProps) => {
+  const chartBars = artists.map(({id, name, color}) => (
     <Bar key={id} dataKey={name} fill={color} />
   ))
-  const formattedData = useMemo(() => formatData(selected), [selected])
+  const formattedData = formatData(artists)
 
   return (
     <ResponsiveContainer width="100%" height={450}>
@@ -37,4 +38,4 @@ const ArtistChart = () => {
   )
 }
 
-export default ArtistChart
+export default memo(ArtistsChart)

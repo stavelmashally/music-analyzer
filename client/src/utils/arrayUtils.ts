@@ -1,4 +1,4 @@
-import { Artist, AudioFeatures } from 'types/artist.model'
+import {Artist, AudioFeatures} from 'types/artist.model'
 
 export const FEATURES: string[] = [
   'danceability',
