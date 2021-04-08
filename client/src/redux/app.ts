@@ -51,7 +51,10 @@ const AppSlice = createSlice({
       }
     },
     addArtist: (state, {payload}: PayloadAction<Artist>) => {
-      state.selected.push({...payload, color: generateColor()})
+      const exists = state.selected.find(artist => artist.id === payload.id)
+      if (!exists) {
+        state.selected.push({...payload, color: generateColor()})
+      }
       state.data = []
       state.searchTerm = ''
     },
