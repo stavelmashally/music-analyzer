@@ -1,7 +1,8 @@
 import {useAppDispatch, useAppSelector} from 'redux/hooks'
 import {deleteArtist, selectedArtistsSelector} from 'redux/app'
 import {Artist} from 'types/artist.model'
-import ArtistItem from './artists/ArtistItem'
+import ArtistItem from './ArtistItem'
+import {HorizontalList} from 'styles'
 
 const SelectionList = () => {
   const selected = useAppSelector(selectedArtistsSelector)
@@ -18,9 +19,7 @@ const SelectionList = () => {
     />
   ))
 
-  return (
-    <div className="ui big horizontal selection list">{selectedArtists}</div>
-  )
+  return <HorizontalList>{selectedArtists}</HorizontalList>
 }
 
 export default SelectionList

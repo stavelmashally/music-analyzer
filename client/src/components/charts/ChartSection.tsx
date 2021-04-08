@@ -2,7 +2,8 @@ import React from 'react'
 import { useAppSelector } from 'redux/hooks'
 import {appSelector} from 'redux/app'
 import ChartPlaceholder from './ChartPlaceholder'
-import Loader from 'components/Loader'
+import { ChartSectionContainer, Loader } from 'styles'
+
 const ArtistChart = React.lazy(() => import('./ArtistChart'))
 
 const ChartSection = () => {
@@ -18,15 +19,10 @@ const ChartSection = () => {
     )
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        marginTop: '50px',
-      }}
+    <ChartSectionContainer
     >
       {content}
-    </div>
+    </ChartSectionContainer>
   )
 }
 

@@ -1,11 +1,13 @@
 import 'styled-components'
 declare module 'styled-components' {
   export interface DefaultTheme {
-    body: string
+    background: string
     text: string
+    surface: string
+    primary: string
+    hover: string
+    link: string
     border: string
-    toggleBorder: string
     gradient: string
-    secondary?: string
   }
 }

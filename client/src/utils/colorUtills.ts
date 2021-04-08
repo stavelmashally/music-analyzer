@@ -1,3 +1,3 @@
 export const generateColor = () => {
-  return '#' + Math.random().toString(16).substr(-6)
+  return `hsla(${~~(360 * Math.random())},70%,70%,1)`
 }

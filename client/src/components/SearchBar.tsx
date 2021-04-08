@@ -1,22 +1,30 @@
 import React, {useEffect} from 'react'
 import {useAppSelector, useAppDispatch} from 'redux/hooks'
-import {fetchArtists, updateSearchTerm, appSelector} from 'redux/app'
+import {fetchArtists, updateSearchTerm, appSelector, addArtist} from 'redux/app'
 import useDebounce from 'hooks/useDebounce'
-import ArtistItem from 'components/artists/ArtistItem'
-import {Input, SearchBox, ListItem} from 'styles'
+import ArtistItem from 'components/ArtistItem'
+import {Input, SearchBox, SearchBarContainer, Error, Loader} from 'styles'
+import {Artist} from 'types/artist.model'
 
 const SearchBar = () => {
-  const {searchTerm, data} = useAppSelector(appSelector)
+  const {searchTerm, data, status, error} = useAppSelector(appSelector)
   const dispatch = useAppDispatch()
   const debouncedSearchTerm = useDebounce(searchTerm, 500)
+
+  const handleArtistSelected = (artist: Artist) => {
+    dispatch(addArtist(artist))
+  }
 
   const artistListItems = data.map(artist => (
     <ArtistItem
       key={artist.id}
       artist={artist}
-      onSelected={() => console.log('selected')}
+      onSelected={handleArtistSelected}
     />
   ))
+  const isLoading = status === 'loading'
+  const showBox = isLoading || artistListItems.length > 0
+  const boxContent = isLoading ? <Loader /> : artistListItems
 
   const handleChange = ({
     target: {value},
@@ -29,14 +37,15 @@ const SearchBar = () => {
   }, [debouncedSearchTerm, dispatch])
 
   return (
-    <div>
+    <SearchBarContainer>
       <Input
         placeholder="Enter artist name"
         value={searchTerm}
         onChange={handleChange}
       />
-      <SearchBox>{artistListItems}</SearchBox>
-    </div>
+      <SearchBox show={showBox}>{boxContent}</SearchBox>
+      {error && <Error>{error}</Error>}
+    </SearchBarContainer>
   )
 }
 

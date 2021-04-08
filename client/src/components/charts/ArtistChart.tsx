@@ -28,7 +28,7 @@ const ArtistChart = () => {
       <BarChart width={100} height={400} data={formattedData}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" interval={0} tick={<CustomizedAxisTick />} />
-        <YAxis width={30} />
+        <YAxis width={40} />
         <Tooltip content={<CustomToolTip />} />
         <Legend wrapperStyle={{paddingTop: '30px'}} />
         {chartBars}
