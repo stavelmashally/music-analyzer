@@ -14,7 +14,7 @@
     "@types/react-redux": "^7.1.16",
     "@types/recharts": "^1.8.19",
     "@types/styled-components": "^5.1.9",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "http-proxy-middleware": "^1.0.5",
     "react": "^16.13.1",
     "react-dark-mode-toggle": "0.0.10",

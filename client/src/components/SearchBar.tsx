@@ -1,17 +1,19 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useAppSelector, useAppDispatch} from 'redux/hooks'
-import {fetchArtists, updateSearchTerm, appSelector, addArtist} from 'redux/app'
+import {fetchArtists, appSelector, addArtist} from 'redux/app'
 import useDebounce from 'hooks/useDebounce'
 import ArtistItem from 'components/ArtistItem'
 import {Input, SearchBox, SearchBarContainer, Error, Loader} from 'styles'
 import {Artist} from 'types/artist.model'
 
 const SearchBar = () => {
-  const {searchTerm, data, status, error} = useAppSelector(appSelector)
+  const [searchTerm, setSearchTerm] = useState('')
+  const {data, status, error} = useAppSelector(appSelector)
   const dispatch = useAppDispatch()
   const debouncedSearchTerm = useDebounce(searchTerm, 500)
 
   const handleArtistSelected = (artist: Artist) => {
+    setSearchTerm('')
     dispatch(addArtist(artist))
   }
 
@@ -28,7 +30,7 @@ const SearchBar = () => {
 
   const handleChange = ({
     target: {value},
-  }: React.ChangeEvent<HTMLInputElement>) => dispatch(updateSearchTerm(value))
+  }: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(value)
 
   useEffect(() => {
     if (debouncedSearchTerm) {

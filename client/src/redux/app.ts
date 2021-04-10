@@ -9,7 +9,6 @@ type fetchArtistsError = {
 }
 
 export interface AppState {
-  searchTerm: string
   data: Artist[]
   selected: Artist[]
   status: 'idle' | 'loading'
@@ -17,7 +16,6 @@ export interface AppState {
 }
 
 const initialState: AppState = {
-  searchTerm: '',
   data: [],
   selected: [],
   status: 'idle',
@@ -43,20 +41,12 @@ const AppSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    updateSearchTerm: (state, {payload}: PayloadAction<string>) => {
-      state.searchTerm = payload
-      if (payload === '') {
-        state.error = null
-        state.data = []
-      }
-    },
     addArtist: (state, {payload}: PayloadAction<Artist>) => {
       const exists = state.selected.find(artist => artist.id === payload.id)
       if (!exists) {
         state.selected.push({...payload, color: generateColor()})
       }
       state.data = []
-      state.searchTerm = ''
     },
     deleteArtist: (state, {payload}: PayloadAction<string>) => {
       state.selected = state.selected.filter(artist => artist.id !== payload)
@@ -74,11 +64,12 @@ const AppSlice = createSlice({
     builder.addCase(fetchArtists.rejected, (state, {payload}) => {
       if (payload) state.error = payload.message
       state.status = 'idle'
+      state.data = []
     })
   },
 })
 
-export const {updateSearchTerm, addArtist, deleteArtist} = AppSlice.actions
+export const {addArtist, deleteArtist} = AppSlice.actions
 export default AppSlice.reducer
 
 export const appSelector = (state: RootState) => state.app
