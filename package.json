@@ -6,8 +6,8 @@
   "scripts": {
     "start": "npm run start --prefix server",
     "client": "npm run start --prefix client",
-    "server": "npm run start --prefix server",
-    "dev": "concurrently \"npm run server\" \"npm run client\" ",
+    "dev-server": "npm run dev --prefix server",
+    "dev": "concurrently \"npm run dev-server\" \"npm run client\" ",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm install --prefix client && npm install --prefix server && npm run build --prefix client"
   },
   "repository": {

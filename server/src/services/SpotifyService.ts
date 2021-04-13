@@ -1,24 +1,12 @@
-import qs from 'qs'
-import {httpClient, httpAuthClient} from '../config/httpClient'
+import {HttpClient} from '../common/HttpClient'
 import {Artist, BaseArtist, AudioFeatures} from '../common/artist'
 import {Suggestion} from '../common/suggestion'
 
-interface AuthHeaders {
-  headers: {
-    Authorization: string
-  }
-}
-
-interface TrackResponse {
-  id: string
-}
-
 export const searchArtists = async (name: string): Promise<Suggestion[]> => {
-  const authHeaders = await generateAuthHeaders()
-
+  const res = await HttpClient.get(`/search?q=${name}&type=artist&limit=5`)
   const {
     artists: {items},
-  } = await httpClient.get(`/search?q=${name}&type=artist&limit=5`, authHeaders)
+  } = res
 
   const suggestions: Suggestion[] = items.map(
     ({id, name, images}: Suggestion) => ({
@@ -31,41 +19,13 @@ export const searchArtists = async (name: string): Promise<Suggestion[]> => {
   return suggestions
 }
 
-const generateAuthHeaders = async (): Promise<AuthHeaders> => {
-  const {access_token} = await httpAuthClient.post(
-    '/token',
-    qs.stringify({
-      grant_type: 'client_credentials',
-    }),
-    {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      auth: {
-        username: process.env.CLIENT_ID!,
-        password: process.env.CLIENT_SECRET!,
-      },
-    },
-  )
-
-  return {
-    headers: {
-      Authorization: `Bearer ${access_token}`,
-    },
-  }
-}
-
 export const getDataForArtist = async (artistId: string): Promise<Artist> => {
-  const authHeaders = await generateAuthHeaders()
-
-  const {id, name, images}: BaseArtist = await httpClient.get(
+  const {id, name, images}: BaseArtist = await HttpClient.get(
     `/artists/${artistId}`,
-    authHeaders,
   )
 
-  const audioFeatures = await getAudioFeatures(artistId, authHeaders)
-  const relatedArtists = await getRelatedArtists(artistId, authHeaders)
+  const audioFeatures = await getAudioFeatures(artistId)
+  const relatedArtists = await getRelatedArtists(artistId)
 
   return {
     id,
@@ -78,12 +38,8 @@ export const getDataForArtist = async (artistId: string): Promise<Artist> => {
 
 export const getRelatedArtists = async (
   artistId: string,
-  authHeaders: AuthHeaders,
 ): Promise<Artist[]> => {
-  const {artists} = await httpClient.get(
-    `/artists/${artistId}/related-artists`,
-    authHeaders,
-  )
+  const {artists} = await HttpClient.get(`/artists/${artistId}/related-artists`)
 
   const relatedArtists: Artist[] = artists
     .slice(0, 3)
@@ -94,21 +50,18 @@ export const getRelatedArtists = async (
 
 export const getAudioFeatures = async (
   artistId: string,
-  authHeaders: AuthHeaders,
 ): Promise<AudioFeatures[]> => {
-  const {tracks} = await httpClient.get(
+  const {tracks} = await HttpClient.get(
     `/artists/${artistId}/top-tracks?country=US`,
-    authHeaders,
   )
 
   // Spotify accepts comma seperated list of ids
   const formattedIds: string[] = tracks
-    .map((track: TrackResponse) => track.id)
+    .map((track: {id: number}) => track.id)
     .join(',')
 
-  const {audio_features} = await httpClient.get(
+  const {audio_features} = await HttpClient.get(
     `/audio-features/?ids=${formattedIds}`,
-    authHeaders,
   )
 
   return audio_features
