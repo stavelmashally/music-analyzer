@@ -4,8 +4,8 @@
   "description": "Web application that lets you to make a comparison between music artists. <br/> The comparison is made by parameters that characterize the nature of the artist's music. <br/> All stats are displayed on a Bar Chart.  <br/>",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run start --prefix server",
+    "start": "node server/dist/app.js",
+    "postinstall": "npm run tsc --prefix server",
     "client": "npm run start --prefix client",
     "server": "npm run start --prefix server",
     "dev": "concurrently \"npm run server\" \"npm run client\" ",

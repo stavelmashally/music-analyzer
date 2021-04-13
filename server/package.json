@@ -9,7 +9,7 @@
   "main": "SpotifyApi.js",
   "scripts": {
     "start": "tsc-watch --onSuccess \"node ./dist/app.js\"",
-    "client": "npm run start --prefix client",
+    "tsc": "tsc",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
