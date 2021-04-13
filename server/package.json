@@ -8,9 +8,7 @@
   },
   "main": "SpotifyApi.js",
   "scripts": {
-    "start": "tsc-watch --onSuccess \"node ./dist/app.js\"",
-    "tsc": "tsc",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "start": "ts-node src/app.ts"
   },
   "keywords": [],
   "author": "",
@@ -24,7 +22,8 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
-    "qs": "^6.9.4"
+    "qs": "^6.9.4",
+    "ts-node": "^9.1.1"
   },
   "devDependencies": {
     "tsc-watch": "^4.2.9",
