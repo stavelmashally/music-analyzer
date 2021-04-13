@@ -22,9 +22,10 @@ To fix a bug or enhance an existing module, follow these steps:
 
 - You will need to register your own Spotify app and set the credentials.<br/>
 1. Create an application on [Spotify's Developer Site](https://developer.spotify.com/my-applications/).<br/>
-2. Set your CLIENT_ID and CLIENT_SECRET in `config/dev.js`.<br/>
+2. Create `.env` file inside the server dir.<br/>
+3. Set your CLIENT_ID and CLIENT_SECRET in `.env`.<br/>
 - Fork the repo
-- Install the dependencies running `npm install`.
+- Install the dependencies running `npm install` inside  root, client & server dir.
 - During development, run `npm run dev`.
 - Create a new branch (`git checkout -b improve-feature`)
 - Make the appropriate changes in the files

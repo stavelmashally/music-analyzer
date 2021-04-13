@@ -1,14 +1,16 @@
-const express = require('express')
-const {json} = require('body-parser')
-const logger = require('./middlewares/logger')
-const {getRoutes} = require('./routes')
+import * as dotenv from 'dotenv'
+import express, {Request, Response} from 'express'
+import logger from './middlewares/logger'
+import {errorHandler} from './middlewares/error'
+import {router} from './routes'
+
+dotenv.config()
 
 const app = express()
 
-app.use(logger())
-app.use(json())
-
-app.use('/api', getRoutes())
+app.use(logger)
+app.use(express.json())
+app.use('/api', router)
 
 if (process.env.NODE_ENV === 'production') {
   // Serve up production assets
@@ -16,10 +18,12 @@ if (process.env.NODE_ENV === 'production') {
 
   // Serve up the index.html
   const path = require('path')
-  app.get('*', (req, res) => {
+  app.get('*', (req: Request, res: Response) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   })
 }
+
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000
 

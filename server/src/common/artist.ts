@@ -1,3 +1,9 @@
+export interface ArtistImage {
+  height: number
+  width: number
+  url: string
+}
+
 export interface AudioFeatures {
   danceability: number
   energy: number
@@ -12,23 +18,13 @@ export interface AudioFeatures {
   tempo: number
 }
 
-interface ArtistImage {
-  width: number
-  height: number
-  url: string | undefined
-}
-
-export interface Artist {
+export interface BaseArtist {
   id: string
   name: string
   images: ArtistImage[]
+}
+
+export interface Artist extends BaseArtist {
   audioFeatures: AudioFeatures
   relatedArtists: Artist[]
-  color?: string
-}
-
-export interface Suggestion {
-  id: string
-  name: string
-  images: ArtistImage[]
 }

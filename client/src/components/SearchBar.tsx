@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import {useAppSelector, useAppDispatch} from 'redux/hooks'
-import {fetchArtists, appSelector, addArtist} from 'redux/app'
+import {fetchSuggestions, appSelector, fetchArtistData} from 'redux/app'
 import useDebounce from 'hooks/useDebounce'
-import ArtistItem from 'components/ArtistItem'
+import SuggestionItem from 'components/SuggestionItem'
 import {Input, SearchBox, SearchBarContainer, Error, Loader} from 'styles'
-import {Artist} from 'types/artist.model'
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -12,21 +11,21 @@ const SearchBar = () => {
   const dispatch = useAppDispatch()
   const debouncedSearchTerm = useDebounce(searchTerm, 500)
 
-  const handleArtistSelected = (artist: Artist) => {
+  const handleSuggestionSelected = (id: string) => {
     setSearchTerm('')
-    dispatch(addArtist(artist))
+    dispatch(fetchArtistData(id))
   }
 
-  const artistListItems = data.map(artist => (
-    <ArtistItem
-      key={artist.id}
-      artist={artist}
-      onSelected={handleArtistSelected}
+  const suggestionsListItems = data.map(suggestion => (
+    <SuggestionItem
+      key={suggestion.id}
+      suggestion={suggestion}
+      onSelected={handleSuggestionSelected}
     />
   ))
   const isLoading = status === 'loading'
-  const showBox = isLoading || artistListItems.length > 0
-  const boxContent = isLoading ? <Loader /> : artistListItems
+  const showBox = isLoading || suggestionsListItems.length > 0
+  const boxContent = isLoading ? <Loader /> : suggestionsListItems
 
   const handleChange = ({
     target: {value},
@@ -34,7 +33,7 @@ const SearchBar = () => {
 
   useEffect(() => {
     if (debouncedSearchTerm) {
-      dispatch(fetchArtists(debouncedSearchTerm))
+      dispatch(fetchSuggestions(debouncedSearchTerm))
     }
   }, [debouncedSearchTerm, dispatch])
 
