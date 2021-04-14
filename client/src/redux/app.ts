@@ -54,7 +54,7 @@ export const fetchArtistData = createAsyncThunk<
   }
 })
 
-const AppSlice = createSlice({
+const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
@@ -70,9 +70,13 @@ const AppSlice = createSlice({
         }))
       }
       state.data = []
+      state.status = 'idle'
     },
     deleteArtist: (state, {payload}: PayloadAction<string>) => {
       state.selected = state.selected.filter(artist => artist.id !== payload)
+      if (state.selected.length === 0) {
+        state.related = []
+      }
     },
   },
   extraReducers: builder => {
@@ -93,20 +97,8 @@ const AppSlice = createSlice({
       state.status = 'loading'
       state.error = null
     })
-    builder.addCase(fetchArtistData.fulfilled, (state, {payload}) => {
-      const exists = state.selected.find(artist => artist.id === payload.id)
-      if (!exists) {
-        console.log('noe exists')
-        state.selected.push({...payload, color: generateColor()})
-        state.related = state.selected[
-          state.selected.length - 1
-        ].relatedArtists.map(artist => ({
-          ...artist,
-          color: generateColor(),
-        }))
-      }
-      state.data = []
-      state.status = 'idle'
+    builder.addCase(fetchArtistData.fulfilled, (state, action) => {
+      appSlice.caseReducers.addArtist(state, action)
     })
     builder.addCase(fetchArtistData.rejected, (state, {payload}) => {
       if (payload) state.error = payload.message
@@ -116,8 +108,8 @@ const AppSlice = createSlice({
   },
 })
 
-export const {addArtist, deleteArtist} = AppSlice.actions
-export default AppSlice.reducer
+export const {addArtist, deleteArtist} = appSlice.actions
+export default appSlice.reducer
 
 export const appSelector = (state: RootState) => state.app
 export const selectedArtistsSelector = (state: RootState) => state.app.selected

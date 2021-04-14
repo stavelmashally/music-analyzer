@@ -9,11 +9,11 @@ https://music-analyze.herokuapp.com/
 
 ## Built with 
 
-- [Spotify API](https://developer.spotify.com/)
 - [React](https://reactjs.org/)
-- [Express](https://expressjs.com/)
 - [Recharts](https://recharts.org/en-US/)
-- [Semantic UI](https://semantic-ui.com/)
+- [Styled Components](https://styled-components.com/)
+- [Express](https://expressjs.com/)
+- [Spotify API](https://developer.spotify.com/)
 
 ## Usage
 Want to contribute? Great!
