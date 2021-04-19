@@ -7,7 +7,6 @@ export const searchArtists = async (name: string): Promise<Suggestion[]> => {
   const {
     artists: {items},
   } = res
-
   const suggestions: Suggestion[] = items.map(
     ({id, name, images}: Suggestion) => ({
       id,

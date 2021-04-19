@@ -7,7 +7,7 @@ interface ArtistItemProps {
   artist: Artist
   showDelete?: boolean
   related?: boolean
-  onSelected: (artist: Artist) => void
+  onSelected: (id: string) => void
 }
 
 const ArtistItem = ({
@@ -26,7 +26,7 @@ const ArtistItem = ({
   return (
     <ListItem
       transparent={isTransparent}
-      onClick={() => onSelected(artist)}
+      onClick={() => onSelected(artist.id)}
       onMouseEnter={() => setIsShown(true)}
       onMouseLeave={() => setIsShown(false)}
     >

@@ -7,7 +7,7 @@ import {Input, SearchBox, SearchBarContainer, Error, Loader} from 'styles'
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState('')
-  const {data, status, error} = useAppSelector(appSelector)
+  const {data, searchStatus, error} = useAppSelector(appSelector)
   const dispatch = useAppDispatch()
   const debouncedSearchTerm = useDebounce(searchTerm, 500)
 
@@ -23,7 +23,7 @@ const SearchBar = () => {
       onSelected={handleSuggestionSelected}
     />
   ))
-  const isLoading = status === 'loading'
+  const isLoading = searchStatus === 'loading' && searchTerm !== ''
   const showBox = isLoading || suggestionsListItems.length > 0
   const boxContent = isLoading ? <Loader /> : suggestionsListItems
 

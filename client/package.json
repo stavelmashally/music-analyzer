@@ -16,6 +16,7 @@
     "@types/styled-components": "^5.1.9",
     "axios": "^0.21.1",
     "http-proxy-middleware": "^1.0.5",
+    "lodash": "^4.17.21",
     "react": "^16.13.1",
     "react-dark-mode-toggle": "0.0.10",
     "react-dom": "^16.13.1",
@@ -45,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.168"
   }
 }

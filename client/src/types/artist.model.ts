@@ -1,3 +1,6 @@
+export interface Feature {
+  [key: string]: number | string
+}
 export interface AudioFeatures {
   danceability: number
   energy: number

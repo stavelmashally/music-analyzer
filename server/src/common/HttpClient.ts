@@ -23,7 +23,8 @@ const generateToken = async (): Promise<string> => {
         password: process.env.CLIENT_SECRET!,
       },
     },
-  )
+    )
+  
   return access_token
 }
 

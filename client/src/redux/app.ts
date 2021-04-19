@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction, createAsyncThunk} from '@reduxjs/toolkit'
 import {RootState} from './store'
 import {Artist, Suggestion} from 'types/artist.model'
+import {pushUnique, getNewRelatedArtists} from 'utils/arrayUtils'
 import {generateColor} from 'utils/colorUtills'
 import axios from 'axios'
 
@@ -8,11 +9,13 @@ type fetchSuggestionsError = {
   message: string
 }
 
+type Status = 'idle' | 'loading'
 export interface AppState {
   data: Suggestion[]
   selected: Artist[]
   related: Artist[]
-  status: 'idle' | 'loading'
+  searchStatus: Status
+  chartStatus: Status
   error: string | null
 }
 
@@ -20,7 +23,8 @@ const initialState: AppState = {
   data: [],
   selected: [],
   related: [],
-  status: 'idle',
+  searchStatus: 'idle',
+  chartStatus: 'idle',
   error: null,
 }
 
@@ -59,42 +63,34 @@ const appSlice = createSlice({
   initialState,
   reducers: {
     addArtist: (state, {payload}: PayloadAction<Artist>) => {
-      const exists = state.selected.find(artist => artist.id === payload.id)
-      if (!exists) {
-        state.selected.push({...payload, color: generateColor()})
-        state.related = state.selected[
-          state.selected.length - 1
-        ].relatedArtists.map(artist => ({
-          ...artist,
-          color: generateColor(),
-        }))
-      }
+      const artist = {...payload, color: generateColor()}
+      state.selected = pushUnique(artist, state.selected)
+      state.related = getNewRelatedArtists(state.selected)
       state.data = []
-      state.status = 'idle'
+      state.chartStatus = 'idle'
     },
     deleteArtist: (state, {payload}: PayloadAction<string>) => {
       state.selected = state.selected.filter(artist => artist.id !== payload)
-      if (state.selected.length === 0) {
-        state.related = []
-      }
+      state.related = getNewRelatedArtists(state.selected)
     },
   },
   extraReducers: builder => {
     builder.addCase(fetchSuggestions.pending, state => {
-      state.status = 'loading'
+      state.searchStatus = 'loading'
       state.error = null
     })
     builder.addCase(fetchSuggestions.fulfilled, (state, {payload}) => {
       state.data = payload
-      state.status = 'idle'
+      state.searchStatus = 'idle'
     })
     builder.addCase(fetchSuggestions.rejected, (state, {payload}) => {
       if (payload) state.error = payload.message
-      state.status = 'idle'
+      state.searchStatus = 'idle'
       state.data = []
     })
     builder.addCase(fetchArtistData.pending, state => {
-      state.status = 'loading'
+      state.data = []
+      state.chartStatus = 'loading'
       state.error = null
     })
     builder.addCase(fetchArtistData.fulfilled, (state, action) => {
@@ -102,7 +98,7 @@ const appSlice = createSlice({
     })
     builder.addCase(fetchArtistData.rejected, (state, {payload}) => {
       if (payload) state.error = payload.message
-      state.status = 'idle'
+      state.chartStatus = 'idle'
       state.data = []
     })
   },

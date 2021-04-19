@@ -216,9 +216,9 @@ export const SearchIconSvg = styled.svg.attrs({
 `
 export const Link = styled.a.attrs({target: '_blank', rel: 'noreferrer'})``
 
-export const Loader = styled.div`
-  width: 49px;
-  height: 49px;
+export const Loader = styled.div<{big?: boolean}>`
+  width: ${({big}) => (big ? '80px' : '40px')};
+  height: ${({big}) => (big ? '80px' : '40px')};
   margin: 0 auto;
   border: 3px solid rgba(158, 158, 158, 0.97);
   border-radius: 50%;
