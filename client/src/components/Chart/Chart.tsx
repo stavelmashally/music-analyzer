@@ -1,4 +1,4 @@
-import {useMemo, memo} from 'react'
+import {memo} from 'react'
 import {
   ResponsiveContainer,
   BarChart,

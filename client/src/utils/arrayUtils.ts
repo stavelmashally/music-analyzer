@@ -1,5 +1,5 @@
 import {Artist, AudioFeatures, Feature} from 'types/artist.model'
-import {FEATURES} from 'components/charts/chartsConfig'
+import {FEATURES} from 'components/Chart/chartUtil'
 import _ from 'lodash'
 
 

@@ -2,9 +2,10 @@ import React from 'react'
 import {useAppSelector} from 'redux/hooks'
 import {appSelector} from 'redux/app'
 import ChartPlaceholder from './ChartPlaceholder'
-import {ChartSectionContainer, Loader} from 'styles'
+import {Wrapper} from './styles'
+import {Loader} from 'components/shared'
 
-const ArtistsChart = React.lazy(() => import('./ArtistsChart'))
+const ArtistsChart = React.lazy(() => import('./Chart'))
 
 const ChartSection = () => {
   const {selected, chartStatus} = useAppSelector(appSelector)
@@ -21,7 +22,7 @@ const ChartSection = () => {
     <ChartPlaceholder />
   )
 
-  return <ChartSectionContainer>{content}</ChartSectionContainer>
+  return <Wrapper>{content}</Wrapper>
 }
 
 export default ChartSection

@@ -1,12 +1,12 @@
 import {useContext} from 'react'
 import {ThemeContext} from 'styled-components'
-import {SearchIconSvg, PlaceholderContainer} from 'styles'
+import {SearchIconSvg, PlaceholderWrapper} from './styles'
 
 const ChartPlaceholder = () => {
   const theme = useContext(ThemeContext)
 
   return (
-    <PlaceholderContainer>
+    <PlaceholderWrapper>
       <SearchIconSvg viewBox="0 0 339.921 339.921">
         <path
           fill={theme.text}
@@ -20,7 +20,7 @@ const ChartPlaceholder = () => {
         />
       </SearchIconSvg>
       <p>Search for artists to make a comparison</p>
-    </PlaceholderContainer>
+    </PlaceholderWrapper>
   )
 }
 

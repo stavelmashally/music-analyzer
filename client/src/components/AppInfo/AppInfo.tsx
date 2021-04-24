@@ -1,8 +1,9 @@
-import {AppInfoContainer, Link} from 'styles'
+import {Wrapper} from './styles'
+import {Link} from 'components/shared'
 
 const AppInfo = () => {
   return (
-    <AppInfoContainer>
+    <Wrapper>
       <p>
         All the data has been collected from the{' '}
         <Link href="https://developer.spotify.com/"> Spotify Api.</Link>
@@ -12,7 +13,7 @@ const AppInfo = () => {
           GitHub.
         </Link>
       </p>
-    </AppInfoContainer>
+    </Wrapper>
   )
 }
 

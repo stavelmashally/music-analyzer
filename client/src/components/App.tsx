@@ -1,9 +1,9 @@
-import {AppProvider} from 'contexts/AppContext'
-import Header from './Header'
-import SearchBar from './SearchBar'
-import SelectionList from './SelectionList'
-import ChartSection from './charts/ChartSection'
-import AppInfo from './AppInfo'
+import {AppProvider} from 'context/AppContext'
+import Header from './Header/Header'
+import SearchBar from './SearchBar/SearchBar'
+import SelectionList from './SelectedList/SelectionList'
+import ChartSection from './Chart/ChartSection'
+import AppInfo from './AppInfo/AppInfo'
 import {AppContainer} from 'styles'
 
 const App = () => (
