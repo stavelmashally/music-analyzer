@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction, createAsyncThunk} from '@reduxjs/toolkit'
 import {RootState} from './store'
-import {Artist, Suggestion} from 'types/artist.model'
+import {Artist, Suggestion} from 'types/interfaces'
 import {pushUnique, getNewRelatedArtists} from 'utils/arrayUtils'
 import {generateColor} from 'utils/colorUtills'
 import axios from 'axios'

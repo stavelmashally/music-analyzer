@@ -1,9 +1,9 @@
-import {Wrapper} from './styles'
-import {Link} from 'components/shared'
+import * as Styled from './styles'
+import {Link} from 'styles'
 
 const AppInfo = () => {
   return (
-    <Wrapper>
+    <Styled.Wrapper>
       <p>
         All the data has been collected from the{' '}
         <Link href="https://developer.spotify.com/"> Spotify Api.</Link>
@@ -13,7 +13,7 @@ const AppInfo = () => {
           GitHub.
         </Link>
       </p>
-    </Wrapper>
+    </Styled.Wrapper>
   )
 }
 

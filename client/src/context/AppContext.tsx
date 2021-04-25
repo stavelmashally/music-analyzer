@@ -1,6 +1,6 @@
 import React, {createContext, useContext} from 'react'
 import {ThemeProvider} from 'styled-components'
-import {lightTheme, darkTheme} from 'theme'
+import {lightTheme, darkTheme} from './theme'
 import {GlobalStyles} from 'styles'
 import useDarkMode, {Theme} from 'hooks/useDarkMode'
 

@@ -12,16 +12,17 @@ import {
 import CustomizedAxisTick from './CustomizedAxisTick'
 import CustomToolTip from './CustomToolTip'
 import {formatData} from 'utils/arrayUtils'
-import {Artist} from 'types/artist.model'
+import {Artist} from 'types/interfaces'
 
-interface ArtistsChartProps {
+interface ChartProps {
   artists: Artist[]
 }
 
-const ArtistsChart = ({artists}: ArtistsChartProps) => {
+const Chart = ({artists}: ChartProps) => {
   const chartBars = artists.map(({id, name, color}) => (
     <Bar key={id} dataKey={name} fill={color} />
   ))
+  
   const formattedData = formatData(artists)
 
   return (
@@ -38,4 +39,4 @@ const ArtistsChart = ({artists}: ArtistsChartProps) => {
   )
 }
 
-export default memo(ArtistsChart)
+export default memo(Chart)

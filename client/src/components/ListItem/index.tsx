@@ -1,5 +1,5 @@
 import React from 'react'
-import {ItemContent, ListItemWrapper} from './styles'
+import * as Styled from './styles'
 
 interface ListItemProps {
   itemId: string
@@ -16,17 +16,16 @@ const ListItem = ({
   itemId,
   transparent,
 }: ListItemProps) => {
-
   return (
-    <ListItemWrapper
-      transparent={transparent}
+    <Styled.Wrapper
+      $transparent={transparent}
       onClick={() => onItemSelected(itemId)}
     >
-      {image && <img src={image} alt="avatar" />}
-      <ItemContent>
+      {image && <Styled.Image src={image} alt="avatar" />}
+      <Styled.ItemContent>
         <strong>{content}</strong>
-      </ItemContent>
-    </ListItemWrapper>
+      </Styled.ItemContent>
+    </Styled.Wrapper>
   )
 }
 

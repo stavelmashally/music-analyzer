@@ -22,8 +22,9 @@ export const LogoWrapper = styled.a`
   :visited {
     color: white;
   }
-  img {
-    width: 30px;
-    height: 30px;
-  }
+`
+export const Image = styled.img`
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
 `

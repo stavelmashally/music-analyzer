@@ -30,9 +30,11 @@ export const Input = styled.input`
   }
 `
 
-export const SearchBoxWrapper = styled.div`
+export const SuggestionsList = styled.ul`
   position: absolute;
   width: inherit;
+  list-style-type: none;
+  margin: 0;
   z-index: 100;
   display: flex;
   flex-direction: column;

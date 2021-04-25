@@ -2,8 +2,9 @@ import React, {useEffect, useState} from 'react'
 import {useAppSelector, useAppDispatch} from 'redux/hooks'
 import {fetchSuggestions, appSelector, fetchArtistData} from 'redux/app'
 import useDebounce from 'hooks/useDebounce'
-import {Input, SearchBoxWrapper, Wrapper, Error} from './styles'
-import {Loader, ListItem} from 'components/shared'
+import * as Styled from './styles'
+import ListItem from 'components/ListItem'
+import {Loader} from 'styles'
 import avatar from 'images/avatar-placeholder.png'
 
 const SearchBar = () => {
@@ -42,15 +43,15 @@ const SearchBar = () => {
   }, [debouncedSearchTerm, dispatch])
 
   return (
-    <Wrapper>
-      <Input
+    <Styled.Wrapper>
+      <Styled.Input
         placeholder="Enter artist name"
         value={searchTerm}
         onChange={handleChange}
       />
-      {showBox ? <SearchBoxWrapper>{boxContent}</SearchBoxWrapper> : null}
-      {error && <Error>{error}</Error>}
-    </Wrapper>
+      {showBox ? <Styled.SuggestionsList>{boxContent}</Styled.SuggestionsList> : null}
+      {error && <Styled.Error>{error}</Styled.Error>}
+    </Styled.Wrapper>
   )
 }
 

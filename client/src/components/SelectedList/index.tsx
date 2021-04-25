@@ -1,6 +1,6 @@
 import {useAppDispatch, useAppSelector} from 'redux/hooks'
 import {deleteArtist, fetchArtistData, appSelector} from 'redux/app'
-import {ListItem} from 'components/shared'
+import ListItem from 'components/ListItem'
 import {HorizontalList} from './styles'
 import avatar from 'images/avatar-placeholder.png'
 

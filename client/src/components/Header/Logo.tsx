@@ -1,13 +1,13 @@
 import React from 'react'
-import {LogoWrapper} from './styles'
+import * as Styled from './styles'
 import logo from 'images/audio-logo.png'
 
 const Logo = () => {
   return (
-    <LogoWrapper href="/">
-      <img src={logo} alt="logo" loading="lazy" style={{marginRight: '10px'}} />
+    <Styled.LogoWrapper href="/">
+      <Styled.Image src={logo} alt="logo" loading="lazy" />
       Music Analyzer
-    </LogoWrapper>
+    </Styled.LogoWrapper>
   )
 }
 
