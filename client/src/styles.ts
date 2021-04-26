@@ -40,7 +40,9 @@ export const GlobalStyles = createGlobalStyle`
   `
 export const Link = styled.a.attrs({target: '_blank', rel: 'noreferrer'})``
 
-export const Loader = styled.div<{$big?: boolean}>`
+export const Loader = styled.div.attrs({'aria-name': 'Loading'})<{
+  $big?: boolean
+}>`
   width: ${({$big}) => ($big ? '80px' : '40px')};
   height: ${({$big}) => ($big ? '80px' : '40px')};
   margin: 0 auto;

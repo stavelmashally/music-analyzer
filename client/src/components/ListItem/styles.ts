@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Wrapper = styled.li<{$transparent?: boolean}>`
+export const Wrapper = styled.li.attrs({'data-testid':"artist"})<{$transparent?: boolean}>`
   display: flex;
   align-items: center;
   flex-wrap: nowrap;

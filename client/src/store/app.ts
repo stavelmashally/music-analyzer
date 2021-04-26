@@ -1,19 +1,20 @@
 import {createSlice, PayloadAction, createAsyncThunk} from '@reduxjs/toolkit'
-import {RootState} from './store'
+import {RootState} from '.'
 import {Artist, Suggestion} from 'types/interfaces'
 import {pushUnique, getNewRelatedArtists} from 'utils/arrayUtils'
 import {generateColor} from 'utils/colorUtills'
 import axios from 'axios'
 
-type fetchSuggestionsError = {
+type Error = {
   message: string
 }
 
 type Status = 'idle' | 'loading'
+
 export interface AppState {
   data: Suggestion[]
   selected: Artist[]
-  related: Artist[]
+  related: Suggestion[]
   searchStatus: Status
   chartStatus: Status
   error: string | null
@@ -31,7 +32,7 @@ const initialState: AppState = {
 export const fetchSuggestions = createAsyncThunk<
   Suggestion[],
   string,
-  {rejectValue: fetchSuggestionsError}
+  {rejectValue: Error}
 >('app/fetchSuggestions', async (name: string, thunkApi) => {
   try {
     const res = await axios.get(`/api/suggestions?name=${name}`)
@@ -46,7 +47,7 @@ export const fetchSuggestions = createAsyncThunk<
 export const fetchArtistData = createAsyncThunk<
   Artist,
   string,
-  {rejectValue: fetchSuggestionsError}
+  {rejectValue: Error}
 >('app/fetchArtistData', async (id: string, thunkApi) => {
   try {
     const res = await axios.get(`/api/artist-data?id=${id}`)

@@ -1,0 +1,169 @@
+{
+  "selected": [
+    {
+      "id": "3TVXtAsR1Inumwj472S9r4",
+      "name": "Drake",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/60cfab40c6bb160a1906be45276829d430058005",
+          "width": 640
+        },
+        {
+          "height": 320,
+          "url": "https://i.scdn.co/image/5ea794cf832550943d5f8122afcf5f23ee9d85b7",
+          "width": 320
+        },
+        {
+          "height": 160,
+          "url": "https://i.scdn.co/image/8eaace74aaca82eaccde400bbcab2653b9cf86e1",
+          "width": 160
+        }
+      ],
+      "audioFeatures": {
+        "danceability": 0.734,
+        "energy": 0.523,
+        "key": 3.2,
+        "loudness": -7.148,
+        "mode": 0.7,
+        "speechiness": 0.211,
+        "acousticness": 0.129,
+        "instrumentalness": 0,
+        "liveness": 0.195,
+        "valence": 0.307,
+        "tempo": 118.987
+      },
+      "relatedArtists": [
+        {
+          "id": "0c173mlxpT3dSFRgMO8XPh",
+          "name": "Big Sean",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab6761610000e5eb5664be4287fd6986938f40fe",
+              "width": 640
+            },
+            {
+              "height": 320,
+              "url": "https://i.scdn.co/image/ab676161000051745664be4287fd6986938f40fe",
+              "width": 320
+            },
+            {
+              "height": 160,
+              "url": "https://i.scdn.co/image/ab6761610000f1785664be4287fd6986938f40fe",
+              "width": 160
+            }
+          ]
+        },
+        {
+          "id": "6l3HvQ5sa6mXTsMTB19rO5",
+          "name": "J. Cole",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/c58beb81196bbdda378b6746c51a10aace2f63a6",
+              "width": 640
+            },
+            {
+              "height": 320,
+              "url": "https://i.scdn.co/image/83ca0c5fcb501018a41994f8778772240c3a4cac",
+              "width": 320
+            },
+            {
+              "height": 160,
+              "url": "https://i.scdn.co/image/ff24214a2e41e0d0a4621b35c53e0573c2c6a65e",
+              "width": 160
+            }
+          ]
+        },
+        {
+          "id": "67nwj3Y5sZQLl72VNUHEYE",
+          "name": "Wale",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/20a2669aad3e87270699534ed03546ff87b20df2",
+              "width": 640
+            },
+            {
+              "height": 320,
+              "url": "https://i.scdn.co/image/b3009389a93456739d9110384404c455cc073b60",
+              "width": 320
+            },
+            {
+              "height": 160,
+              "url": "https://i.scdn.co/image/200fd1f4c86d207e42b668a5caf90e420028e49f",
+              "width": 160
+            }
+          ]
+        }
+      ],
+      "color": "hsla(129,70%,70%,1)"
+    }
+  ],
+  "related": [
+    {
+      "id": "6l3HvQ5sa6mXTsMTB19rO5",
+      "name": "J. Cole",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/c58beb81196bbdda378b6746c51a10aace2f63a6",
+          "width": 640
+        },
+        {
+          "height": 320,
+          "url": "https://i.scdn.co/image/83ca0c5fcb501018a41994f8778772240c3a4cac",
+          "width": 320
+        },
+        {
+          "height": 160,
+          "url": "https://i.scdn.co/image/ff24214a2e41e0d0a4621b35c53e0573c2c6a65e",
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "67nwj3Y5sZQLl72VNUHEYE",
+      "name": "Wale",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/20a2669aad3e87270699534ed03546ff87b20df2",
+          "width": 640
+        },
+        {
+          "height": 320,
+          "url": "https://i.scdn.co/image/b3009389a93456739d9110384404c455cc073b60",
+          "width": 320
+        },
+        {
+          "height": 160,
+          "url": "https://i.scdn.co/image/200fd1f4c86d207e42b668a5caf90e420028e49f",
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "0c173mlxpT3dSFRgMO8XPh",
+      "name": "Big Sean",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab6761610000e5eb5664be4287fd6986938f40fe",
+          "width": 640
+        },
+        {
+          "height": 320,
+          "url": "https://i.scdn.co/image/ab676161000051745664be4287fd6986938f40fe",
+          "width": 320
+        },
+        {
+          "height": 160,
+          "url": "https://i.scdn.co/image/ab6761610000f1785664be4287fd6986938f40fe",
+          "width": 160
+        }
+      ]
+    }
+  ]
+}

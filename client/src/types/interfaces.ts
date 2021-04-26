@@ -26,7 +26,7 @@ export interface Artist {
   name: string
   images: ArtistImage[]
   audioFeatures: AudioFeatures
-  relatedArtists: Artist[]
+  relatedArtists: Suggestion[]
   color?: string
 }
 

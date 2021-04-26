@@ -1,6 +1,6 @@
 import React from 'react'
-import {useAppSelector} from 'redux/hooks'
-import {appSelector} from 'redux/app'
+import {useAppSelector} from 'store/hooks'
+import {appSelector} from 'store/app'
 import ChartPlaceholder from './Placeholder'
 import * as Styled from './styles'
 import {Loader} from 'styles'
