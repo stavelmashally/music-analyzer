@@ -1,11 +1,11 @@
 import {useAppDispatch, useAppSelector} from 'store/hooks'
-import {deleteArtist, fetchArtistData, appSelector} from 'store/app'
+import {deleteArtist, fetchArtistData, selectListState} from 'store/app'
 import ListItem from 'components/ListItem'
 import {HorizontalList} from './styles'
 import avatar from 'images/avatar-placeholder.png'
 
-const SelectionList = () => {
-  const {selected, related} = useAppSelector(appSelector)
+const SelectedList = () => {
+  const {selected, related} = useAppSelector(selectListState)
   const dispatch = useAppDispatch()
 
   const handleDeleteArtist = (id: string) => {
@@ -44,4 +44,4 @@ const SelectionList = () => {
   )
 }
 
-export default SelectionList
+export default SelectedList

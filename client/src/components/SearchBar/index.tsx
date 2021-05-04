@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import {useAppSelector, useAppDispatch} from 'store/hooks'
 import {fetchSuggestions, appSelector, fetchArtistData} from 'store/app'
 import useDebounce from 'hooks/useDebounce'
@@ -9,7 +9,7 @@ import avatar from 'images/avatar-placeholder.png'
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState('')
-  const {data, searchStatus, error} = useAppSelector(appSelector)
+  const {suggestions, searchStatus, error} = useAppSelector(appSelector)
   const dispatch = useAppDispatch()
   const debouncedSearchTerm = useDebounce(searchTerm, 500)
 
@@ -18,7 +18,7 @@ const SearchBar = () => {
     dispatch(fetchArtistData(id))
   }
 
-  const suggestionsListItems = data.map(suggestion => (
+  const suggestionsListItems = suggestions.map(suggestion => (
     <ListItem
       key={suggestion.id}
       itemId={suggestion.id}
@@ -49,7 +49,9 @@ const SearchBar = () => {
         value={searchTerm}
         onChange={handleChange}
       />
-      {showBox ? <Styled.SuggestionsList>{boxContent}</Styled.SuggestionsList> : null}
+      {showBox ? (
+        <Styled.SuggestionsList>{boxContent}</Styled.SuggestionsList>
+      ) : null}
       {error && <Styled.Error>{error}</Styled.Error>}
     </Styled.Wrapper>
   )

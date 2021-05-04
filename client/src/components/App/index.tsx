@@ -1,7 +1,7 @@
 import {AppProvider} from 'context/AppContext'
 import Header from 'components/Header'
 import SearchBar from 'components/SearchBar'
-import SelectionList from 'components/SelectedList'
+import SelectedList from 'components/SelectedList'
 import ChartSection from 'components/ChartSection'
 import AppInfo from 'components/AppInfo'
 import * as Styled from './styles'
@@ -12,7 +12,7 @@ const App = () => (
       <Header />
       <Styled.Wrapper>
         <SearchBar />
-        <SelectionList />
+        <SelectedList />
         <ChartSection />
         <AppInfo />
       </Styled.Wrapper>
