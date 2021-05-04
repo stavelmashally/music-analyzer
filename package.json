@@ -8,6 +8,7 @@
     "client": "npm run start --prefix client",
     "dev-server": "npm run dev --prefix server",
     "dev": "concurrently \"npm run dev-server\" \"npm run client\" ",
+    "test:client": "npm run test --prefix client",
     "setup": "npm install && npm install --prefix client && npm install --prefix server",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm install --prefix client && npm install --prefix server && npm run build --prefix client"
   },
