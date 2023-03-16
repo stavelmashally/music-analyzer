@@ -5,7 +5,7 @@ All stats are displayed on a Bar Chart.  <br/>
 
 
 ### Try it
-https://music-analyze.herokuapp.com/
+https://music-analyzer.onrender.com
 
 ## Built with 
 
